@@ -41,8 +41,13 @@ class Migration_{$timestamp}_{$description} extends Database{
 }
 
 EOT;
+        $directory = __DIR__ . "/../../migrations";
 
-        $path = __DIR__ . "/../../migrations/{$filename}";
+        if (!is_dir($directory)) {
+            mkdir($directory, 0755, true);
+        }
+
+        $path = $directory . "/{$filename}";
         file_put_contents($path, $template);
         showSuccessLog("Migration created: {$filename}");
     }
