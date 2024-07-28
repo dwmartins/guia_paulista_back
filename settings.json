@@ -1,5 +1,5 @@
 {
-    "language": "pt-br",
-    "emailSending": "off",
+    "language": "en-us",
+    "emailSending": "on",
     "timezone": "America/Sao_Paulo"
 }

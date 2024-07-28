@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Class\EmailConfig;
+use App\Class\SiteInfo;
 use App\Http\Request;
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -51,16 +52,17 @@ class SendEmail {
         $this->template = $template;
     }
 
-    public function send() {
+    public function send(SiteInfo $siteInfo = null) {
+        if(loadFileSettings("emailSending") === "off") {
+            return;
+        }
+
         $mail = new PHPMailer(true);
         $languageParts = explode('-', strtolower(LANGUAGE));
         $language = $languageParts[0];
     
-        $emailConfig = Request::getAttribute('emailConfig');
-
-        if(!$emailConfig->getActivated()) {
-            return;
-        }
+        $emailConfig = new EmailConfig();
+        $emailConfig->fetch();
     
         try {
             $mail->setLanguage($language);
@@ -73,7 +75,7 @@ class SendEmail {
             $mail->Port       = $emailConfig->getPort();
             $mail->CharSet = 'UTF-8';
     
-            $mail->setFrom($emailConfig->getEmailAddress(), $emailConfig->getEmailAddress());
+            $mail->setFrom($emailConfig->getEmailAddress(), $siteInfo->getWebSiteName());
             $mail->addAddress($this->to);
     
             $mail->isHTML(true);

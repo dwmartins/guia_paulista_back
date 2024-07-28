@@ -55,6 +55,9 @@ class UserController {
             $user->setPassword($body['password']);
             $user->save();
 
+            $sendEmail = new SendEmailController($user->getEmail());
+            $sendEmail->welcome($user);
+
             $response->json([
                 'message' => USER_CREATED
             ], 201);

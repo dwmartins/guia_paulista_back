@@ -88,14 +88,3 @@ function loadTimeZone() {
 
     return $settings['timezone'];
 }
-
-function loadFileSettings() {
-    $rootPath = realpath(__DIR__);
-    $fileSettings = $rootPath . '/settings.json';
-
-    if (!file_exists($fileSettings)) {
-        throw new Exception("The settings file was not found.");
-    }
-
-    return json_decode(file_get_contents($fileSettings), true);
-}

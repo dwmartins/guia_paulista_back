@@ -19,7 +19,7 @@ class UserValidators {
             Validator::validate($fields);
             
             foreach ($fields as $key => $value) {
-                if($key === "E-mail") {
+                if($key === EMAIL_LABEL) {
                     if(!TextValidator::email($value)) {
                         Response::json([
                             'error'     => true,
@@ -32,7 +32,7 @@ class UserValidators {
                     continue;
                 }
 
-                if($key === "Senha") {
+                if($key === PASSWORD_LABEL) {
                     continue;
                 }
 
@@ -68,7 +68,7 @@ class UserValidators {
             Validator::validate($fields);
 
             foreach ($fields as $key => $value) {
-                if($key === "E-mail") {
+                if($key === EMAIL_LABEL) {
                     if(!TextValidator::email($value)) {
                         Response::json([
                             'error'     => true,
@@ -104,8 +104,8 @@ class UserValidators {
     public static function login(array $data) {
         try {
             $fields = [
-                "E-mail" => $data['email'] ?? '',
-                "Senha"  => $data['password'] ?? ''
+                EMAIL_LABEL => $data['email'] ?? '',
+                PASSWORD_LABEL  => $data['password'] ?? ''
             ];
 
             Validator::validate($fields);
@@ -131,7 +131,7 @@ class UserValidators {
     public static function recoverPassword(array $data) {
         try {
             $fields = [
-                "E-mail" => $data['email'] ?? ''
+                EMAIL_LABEL => $data['email'] ?? ''
             ];
 
             Validator::validate($fields);

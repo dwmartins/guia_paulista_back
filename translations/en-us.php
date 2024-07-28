@@ -4,6 +4,7 @@ define("WELCOME_TO_API", "Welcome to the API");
 define("SAVED_SITE_SETTINGS", "Site settings saved successfully.");
 define("SAVED_WEBSITE_INFORMATION", "Website information saved successfully.");
 define("UPDATED_IMAGES", "Images updated successfully");
+define("SAVE_SETTINGS", "Settings saved successfully.");
 
 // Users
 define("USER_CREATED", "Your account has been created successfully.");
@@ -44,3 +45,22 @@ define("KEYWORDS_LABEL", "Keywords");
 define("NAME_LABEL", "First Name");
 define("LAST_NAME_LABEL", "Last Name");
 define("PASSWORD_LABEL", "Password");
+define("SERVER", "Server"); 
+define("EMAIL_ADDRESS", "Email Address");
+define("USER_NAME", "User Name");
+
+// Email Templates
+// WELCOME
+define("WELCOME_TITLE", "Welcome to");
+define("HIGHLIGHT_MESSAGE", "✨ Discover incredible opportunities to promote your business! ✨");
+define("GREETING", "Hello");
+define("WELCOME_MESSAGE", "Congratulations on registering in our Guide. We are excited to have you with us and to provide an amazing platform to promote and discover products and services!");
+define("QUOTE_MESSAGE", "Explore the various promotion opportunities and connect with an audience eager to discover new things!");
+define("FEATURES_TITLE", "Check out some of the features you will find in our Guide:");
+define("FEATURE_1", "Easy and quick publication of your ads");
+define("FEATURE_2", "Engaged community of advertisers and consumers");
+define("FEATURE_3", "Special promotions and highlight opportunities");
+define("FEATURE_4", "Valuable reviews and feedback from the community");
+define("FEATURE_5", "Efficient management of your advertising campaigns");
+define("HELP_MESSAGE", "We are here to help you achieve the maximum impact with your ads!");
+define("SIGNATURE", "Sincerely, <br> Team of");

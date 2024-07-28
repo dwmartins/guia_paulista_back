@@ -48,3 +48,19 @@ define("PASSWORD_LABEL", "Senha");
 define("SERVER", "Servidor");
 define("EMAIL_ADDRESS", "Endereço de e-mail");
 define("USER_NAME", "Nome de usuário");
+
+// Email Templates
+// WELCOME
+define("WELCOME_TITLE", "Bem-vindo ao");
+define("HIGHLIGHT_MESSAGE", "✨ Descubra oportunidades incríveis para promover o seu negócio! ✨");
+define("GREETING", "Olá");
+define("WELCOME_MESSAGE", "Parabéns por se cadastrar no nosso Guia. Estamos empolgados em ter você conosco e proporcionar uma plataforma incrível para divulgar e descobrir produtos e serviços!");
+define("QUOTE_MESSAGE", "Explore as diversas oportunidades de promoção e conecte-se com uma audiência ávida por descobrir novidades!");
+define("FEATURES_TITLE", "Confira abaixo alguns dos recursos que você encontrará em nosso Guia:");
+define("FEATURE_1", "Publicação fácil e rápida de suas propagandas");
+define("FEATURE_2", "Comunidade engajada de anunciantes e consumidores");
+define("FEATURE_3", "Promoções especiais e oportunidades de destaque");
+define("FEATURE_4", "Avaliações e feedback valiosos da comunidade");
+define("FEATURE_5", "Gerenciamento eficiente de suas campanhas publicitárias");
+define("HELP_MESSAGE", "Estamos aqui para ajudá-lo a obter o máximo impacto com suas propagandas!");
+define("SIGNATURE", "Atenciosamente, <br> Equipe do");
