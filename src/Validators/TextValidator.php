@@ -4,7 +4,7 @@ namespace App\Validators;
 
 class TextValidator {
     public static function fullText(string $field) {
-        $fullText = "/^[\p{L}0-9\s\-_.,!?@#\$%&*()]+$/u";
+        $fullText = "/^[\p{L}0-9\s\-_.,!?@#\$%&*()áéíóúãõç]+$/ui";
 
         if(!preg_match($fullText, $field)) {
             return false;

@@ -12,7 +12,7 @@ class User {
     private string $password = "";
     private string $token = "";
     private string $active = "Y";
-    private string $role = "visitor"; // ['support', 'admin', 'mod', 'sponsor', visitor]
+    private string $role = "visitor"; // ['support', 'admin', 'mod', 'sponsor', visitor, 'test']
     private string $description = "";
     private string $phone = "";
     private string $photo = "";

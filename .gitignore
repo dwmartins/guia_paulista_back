@@ -4,3 +4,5 @@ vendor
 .env
 .env.development
 error.log
+
+.vscode

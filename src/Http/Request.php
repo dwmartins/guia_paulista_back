@@ -49,23 +49,17 @@ class Request {
         }
     
         $bearer = explode(" ", $headers['Authorization']);
-        if (count($bearer) !== 3 || $bearer[0] !== 'Bearer') {
+
+        if (count($bearer) !== 2 || $bearer[0] !== 'Bearer') {
             return false;
         }
 
-        $fieldUser = explode(":", $bearer[1]) ?? null;
-        $fieldToken = explode(":", $bearer[2]) ?? null;
-
-        $userId =  $fieldUser[1] ?? null;
-        $token = $fieldToken[1] ?? null;
-
-        if(empty($fieldUser) || $fieldUser[0] !== 'userId' || empty($userId)) {
+        if(!isset($headers['userId']) || empty($headers['userId'])) {
             return false;
         }
 
-        if(empty($fieldToken) || $fieldToken[0] !== 'token' || empty($token)) {
-            return false;
-        }
+        $token = $bearer[1];
+        $userId = $headers['userId'];
     
         return [
             "userId" => $userId,
