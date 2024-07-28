@@ -4,6 +4,7 @@ define("WELCOME_TO_API", "Bem vindo a api");
 define("SAVED_SITE_SETTINGS", "Configurações do site salvas com sucesso.");
 define("SAVED_WEBSITE_INFORMATION", "Informações do site salvas com sucesso.");
 define("UPDATED_IMAGES", "Imagens atualizadas com sucesso");
+define("SAVE_SETTINGS", "Configurações salvas com sucesso.");
 
 // Users
 define("USER_CREATED", "Sua conta foi criada com sucesso.");
@@ -44,3 +45,6 @@ define("KEYWORDS_LABEL", "Palavras chaves");
 define("NAME_LABEL", "Nome");
 define("LAST_NAME_LABEL", "Sobrenome");
 define("PASSWORD_LABEL", "Senha");
+define("SERVER", "Servidor");
+define("EMAIL_ADDRESS", "Endereço de e-mail");
+define("USER_NAME", "Nome de usuário");
