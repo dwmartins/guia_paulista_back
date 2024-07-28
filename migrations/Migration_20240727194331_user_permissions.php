@@ -24,6 +24,7 @@ class Migration_20240727194331_user_permissions extends Database{
                 content JSON,
                 siteInfo JSON,
                 emailSending JSON,
+                settings JSON,
                 createdAt DATETIME,
                 updatedAt DATETIME,
                 CONSTRAINT fk_userPer_permissions FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE

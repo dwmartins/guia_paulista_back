@@ -26,6 +26,10 @@ class UserController {
             "allowed" => false,
             "label" => "Informações do site"
         ],
+        "settings" => [
+            "allowed" => false,
+            "label" => "Configurações do site"
+        ],
         "emailSettings" => [
             "allowed" => false,
             "label" => "Configurações de e-mail"

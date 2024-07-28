@@ -115,6 +115,43 @@ class UserMiddleware {
         }
     }
 
+    public function settings(Request $request, Response $response) {
+        try {
+            $user = $request->getAttribute("userRequest");
+
+            if(in_array($user->getRole(), self::$noPermissionNeeded)) {
+                return true;
+            }
+
+            if($user->getRole() === "test") {
+                return $response::json([
+                    "message" => "Esta conta é apenas para teste, não tem permissões para editar, criar ou excluir algo."
+                ], 403);
+            }
+
+            $userPermission = new UserPermissions();
+            $userPermission->getPermissions($user);
+
+            if(!empty($userPermission->getId())) {
+                $settings = $userPermission->getEmailSending();
+
+                if($settings["allowed"]) {
+                    return true;
+                }
+            }
+
+            return $response::json([
+                "message" => "Você não tem permissão para executar essa ação."
+            ], 403);
+
+        } catch (Exception $e) {
+            logError($e->getMessage());
+            return $response->json([
+                "message" => "Oops, Ocorreu um erro inesperado."
+            ], 500);
+        }
+    }
+
     public function emailSendingSettings(Request $request, Response $response) {
         try {
             $user = $request->getAttribute("userRequest");

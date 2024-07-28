@@ -11,6 +11,7 @@ class UserPermissions {
     private string $content = "";
     private string $siteInfo = "";
     private string $emailSending = "";
+    private string $settings = "";
     private string $createdAt = "";
     private string $updatedAt = "";
 
@@ -32,6 +33,7 @@ class UserPermissions {
             'users'          => $this->users,
             'content'        => $this->content,
             'siteInfo'       => $this->siteInfo,
+            'settings'       => $this->settings,
             'emailSending'   => $this->emailSending,
             'createdAt'      => $this->createdAt,
             'updatedAt'      => $this->updatedAt
@@ -49,6 +51,10 @@ class UserPermissions {
 
         if (isset($permission['siteInfo'])) {
             $this->siteInfo = is_string($permission['siteInfo']) ? $permission['siteInfo'] : json_encode($permission['siteInfo']);
+        }
+
+        if (isset($permission['settings'])) {
+            $this->settings = is_string($permission['settings']) ? $permission['settings'] : json_encode($permission['settings']);
         }
 
         if (isset($permission['emailSending'])) {
@@ -90,6 +96,14 @@ class UserPermissions {
 
     public function setSiteInfo(string $siteInfo): void {
         $this->siteInfo = json_encode($siteInfo);
+    }
+
+    public function getSettings(): array {
+        return json_decode($this->settings, true);
+    }
+
+    public function setSettings(string $Settings): void {
+        $this->settings = json_encode($Settings);
     }
 
     public function getEmailSending(): array {

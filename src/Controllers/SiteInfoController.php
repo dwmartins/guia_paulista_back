@@ -117,7 +117,10 @@ class SiteInfoController {
         try {
             $siteInfo = new SiteInfo();
             
-            return $response->json($siteInfo->fetch());
+            return $response->json([
+                "siteInfo" => $siteInfo->fetch(),
+                "settings" => getAllSettings()
+            ]);
 
         } catch (Exception $e) {
             logError($e->getMessage());
