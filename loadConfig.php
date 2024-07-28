@@ -75,6 +75,7 @@ function loadTranslations() {
         throw new Exception("The translation file for language $language was not found.");
     }
 
+    define("LANGUAGE", $language);
     include_once $translationFile;
 }
 

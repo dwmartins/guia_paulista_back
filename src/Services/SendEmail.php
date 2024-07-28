@@ -53,6 +53,8 @@ class SendEmail {
 
     public function send() {
         $mail = new PHPMailer(true);
+        $languageParts = explode('-', strtolower(LANGUAGE));
+        $language = $languageParts[0];
     
         $emailConfig = Request::getAttribute('emailConfig');
 
@@ -61,7 +63,7 @@ class SendEmail {
         }
     
         try {
-            $mail->setLanguage("br");
+            $mail->setLanguage($language);
             $mail->isSMTP();
             $mail->Host       = $emailConfig->getServer();
             $mail->SMTPAuth   = true;
