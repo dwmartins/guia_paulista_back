@@ -14,7 +14,7 @@ class TextValidator {
     }
 
     public static function simpleText(string $field) {
-        $simpleText = "/^[a-zA-Z]+$/";
+        $simpleText = "/^[a-zA-Z\s]+$/";
 
         if(!preg_match($simpleText, $field)) {
             return false;
