@@ -33,14 +33,14 @@ class SiteInfoController {
             $siteInfo->save();
 
             $response->json([
-                "message" => "Informações do site salvas com sucesso.",
+                "message" => SAVED_WEBSITE_INFORMATION,
                 "siteInfoData" => $siteInfo->toArray()
             ], 201);
             
         } catch (Exception $e) {
             logError($e->getMessage());
             return $response->json([
-                "message" => "Falha ao salvar as informações do site."
+                "message" => FATAL_ERROR
             ], 500);
         }
     }
@@ -101,14 +101,14 @@ class SiteInfoController {
             $siteInfo->save();
 
             return $response->json([
-                "message" => "Imagens atualizadas com sucesso",
+                "message" => UPDATED_IMAGES,
                 "siteInfoData" => $siteInfo->toArray()
             ]);
 
         } catch (Exception $e) {
             logError($e->getMessage());
             return $response->json([
-                "message" => "Falha ao salvar as imagens do site."
+                "message" => FATAL_ERROR
             ], 500);
         }
     }
@@ -125,7 +125,7 @@ class SiteInfoController {
         } catch (Exception $e) {
             logError($e->getMessage());
             return $response->json([
-                "message" => "Falha ao buscar as informações do site."
+                "message" => FATAL_ERROR
             ], 500);
         }
     }

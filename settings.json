@@ -1,4 +1,5 @@
 {
     "language": "pt-br",
-    "emailSending": "off"
+    "emailSending": "off",
+    "timezone": "America/Sao_Paulo"
 }

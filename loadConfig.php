@@ -2,7 +2,8 @@
 
 use App\Http\Response;
 
-date_default_timezone_set('America/Sao_Paulo');
+loadTranslations();
+date_default_timezone_set(loadTimeZone());
 
 // Verifica se o script está sendo executado via CLI
 function isCli() {
@@ -57,4 +58,43 @@ function setHeaders($allowed_origin) {
         header("HTTP/1.1 200 OK");
         exit;
     }
+}
+
+function loadTranslations() {
+    $rootPath = realpath(__DIR__);
+    $settings = loadFileSettings();
+
+    if (!isset($settings['language'])) {
+        throw new Exception("The language setting is not set.");
+    }
+
+    $language = $settings['language'];
+    $translationFile = $rootPath . "/translations/$language.php";
+
+    if (!file_exists($translationFile)) {
+        throw new Exception("The translation file for language $language was not found.");
+    }
+
+    include_once $translationFile;
+}
+
+function loadTimeZone() {
+    $settings = loadFileSettings();
+
+    if (!isset($settings['timezone'])) {
+        return "America/Sao_Paulo";
+    }
+
+    return $settings['timezone'];
+}
+
+function loadFileSettings() {
+    $rootPath = realpath(__DIR__);
+    $fileSettings = $rootPath . '/settings.json';
+
+    if (!file_exists($fileSettings)) {
+        throw new Exception("The settings file was not found.");
+    }
+
+    return json_decode(file_get_contents($fileSettings), true);
 }

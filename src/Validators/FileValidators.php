@@ -8,15 +8,15 @@ class FileValidators {
         $maxFileSize = 5 * 1024 * 1024; // 5 MB em bytes
 
         if(!in_array($file['type'], $allowedTypes)) {
-            return ["invalid" => "O arquivo deve ser uma imagem JPG, JPEG ou PNG."];
+            return ["invalid" => UNSUPPORTED_IMG];
         }
 
         if($file['size'] > $maxFileSize) {
-            return ["invalid" => "O arquivo não pode exceder 5MB."];
+            return ["invalid" => LARGE_FILE];
         }
 
         if($file['error'] !== UPLOAD_ERR_OK) {
-            return ["invalid" => "Erro durante o upload do arquivo."];
+            return ["invalid" => UPLOAD_ERROR];
         }
 
         $mimeType = explode("/" , $file["type"])[1];
@@ -33,15 +33,15 @@ class FileValidators {
         $maxFileSize = 5 * 1024 * 1024;
     
         if(!in_array($file['type'], $allowedTypes)) {
-            return ["invalid" => "O arquivo deve ser um ícone ICO ou JPG, JPEG ou PNG."];
+            return ["invalid" => UNSUPPORTED_ICO];
         }
     
         if($file['size'] > $maxFileSize) {
-            return ["invalid" => "O arquivo não pode exceder 5MB."];
+            return ["invalid" => LARGE_FILE];
         }
     
         if($file['error'] !== UPLOAD_ERR_OK) {
-            return ["invalid" => "Erro durante o upload do arquivo."];
+            return ["invalid" => UPLOAD_ERROR];
         }
     
         $mimeType = explode("/" , $file["type"])[1];

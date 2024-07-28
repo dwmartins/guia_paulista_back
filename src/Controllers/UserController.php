@@ -16,23 +16,23 @@ class UserController {
     private array $permissions = [
         "users" => [
             "allowed" => false,
-            "label" => "Usuários"
+            "label" => "Users"
         ],
         "content" => [
             "allowed" => false,
-            "label" => "Conteúdos do site"
+            "label" => "Website content"
         ],
         "siteInfo" => [
             "allowed" => false,
-            "label" => "Informações do site"
+            "label" => "Website information"
         ],
         "settings" => [
             "allowed" => false,
-            "label" => "Configurações do site"
+            "label" => "Site Settings"
         ],
         "emailSettings" => [
             "allowed" => false,
-            "label" => "Configurações de e-mail"
+            "label" => "Email Settings"
         ]
     ];
 
@@ -46,7 +46,7 @@ class UserController {
 
             if(!empty(UserDAO::fetchByEmail($body['email']))) {
                 return $response->json([
-                    'message'   => "Este e-mail já está em uso."
+                    'message'   => EMAIL_IN_USE
                 ], 409);
             }
 
@@ -56,13 +56,13 @@ class UserController {
             $user->save();
 
             $response->json([
-                'message' => "Sua conta foi criada com sucesso."
+                'message' => USER_CREATED
             ], 201);
 
         } catch (Exception $e) {
             logError($e->getMessage());
             return $response->json([
-                'message' => "Falha ao criar o usuário."
+                'message' => FATAL_ERROR
             ], 500);
         }
     }

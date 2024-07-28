@@ -8,16 +8,16 @@ use App\Http\Response;
 class SiteInfoValidator {
     public static function create(SiteInfo $siteInfo) {
         $fields = [
-            "Nome do site"    => $siteInfo->getWebSiteName(),
-            "E-mail"          => $siteInfo->getEmail(),
-            "Telefone"        => $siteInfo->getPhone(),
-            "Cidade"          => $siteInfo->getCity(),
-            "Estado"          => $siteInfo->getState(),
-            "Endereço"        => $siteInfo->getAddress(),
-            "Instagram"       => $siteInfo->getInstagram(),
-            "Facebook"        => $siteInfo->getFacebook(),
-            "Descrição"       => $siteInfo->getDescription(),
-            "Palavras chaves" => $siteInfo->getKeywords(),
+            SITE_NAME_LABEL    => $siteInfo->getWebSiteName(),
+            EMAIL_LABEL        => $siteInfo->getEmail(),
+            PHONE_LABEL        => $siteInfo->getPhone(),
+            CITY_LABEL         => $siteInfo->getCity(),
+            STATE_LABEL        => $siteInfo->getState(),
+            ADDRESS_LABEL      => $siteInfo->getAddress(),
+            INSTAGRAM_LABEL    => $siteInfo->getInstagram(),
+            FACEBOOK_LABEL     => $siteInfo->getFacebook(),
+            DESCRIPTION_LABEL  => $siteInfo->getDescription(),
+            KEYWORDS_LABEL     => $siteInfo->getKeywords(),
         ];
 
         foreach($fields as $key => $value) {
@@ -25,11 +25,10 @@ class SiteInfoValidator {
                 continue;
             }
 
-            if($key === "E-mail") {
+            if($key === EMAIL_LABEL) {
                 if(!TextValidator::email($value)) {
                     Response::json([
-                        'error'     => true,
-                        'message'   => "O e-mail é invalido"
+                        'message'   => INVALID_EMAIL
                     ], 400);
 
                     return false;
@@ -38,11 +37,10 @@ class SiteInfoValidator {
                 continue;
             }
 
-            if($key === "Instagram" || $key === "Facebook") {
+            if($key === INSTAGRAM_LABEL || $key === FACEBOOK_LABEL) {
                 if(!TextValidator::isValidUrl($value)) {
                     Response::json([
-                        'error'     => true,
-                        'message'   => "O campo ($key) é invalido"
+                        'message'   => sprintf(INVALID_FIELD_ERROR, $key)
                     ], 400);
 
                     return false;
@@ -53,8 +51,7 @@ class SiteInfoValidator {
 
             if(!TextValidator::fullText($value)) {
                 Response::json([
-                    'error'     => true,
-                    'message'   => "O campo ($key) contem caracteres inválidos."
+                    'message'   => sprintf(FIELD_INVALID_CHARACTERS, $key)
                 ], 400);
 
                 return false;

@@ -22,7 +22,7 @@ function getAllSettings() {
 }
 
 function updateSetting($name, $newValue) {
-    $settingsToUpdateFile = ["language", "emailSending"];
+    $settingsToUpdateFile = ["language", "emailSending", "timezone"];
 
     try {
         $setting = new Settings();

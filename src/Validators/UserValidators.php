@@ -10,10 +10,10 @@ class UserValidators {
     public static function create(array $data) {
         try {
             $fields = [
-                'Nome'        => $data['name'] ?? '',
-                'Sobre nome'  => $data['lastName'] ?? '',
-                'E-mail'      => $data['email'] ?? '',
-                'Senha'       => $data['password'] ?? ''
+                NAME_LABEL       => $data['name'] ?? '',
+                LAST_NAME_LABEL  => $data['lastName'] ?? '',
+                EMAIL_LABEL      => $data['email'] ?? '',
+                PASSWORD_LABEL   => $data['password'] ?? ''
             ];
 
             Validator::validate($fields);
@@ -23,7 +23,7 @@ class UserValidators {
                     if(!TextValidator::email($value)) {
                         Response::json([
                             'error'     => true,
-                            'message'   => "O e-mail é invalido"
+                            'message'   => INVALID_EMAIL
                         ], 400);
 
                         return false;
@@ -39,7 +39,7 @@ class UserValidators {
                 if(!TextValidator::simpleText($value)) {
                     Response::json([
                         'error'     => true,
-                        'message'   => "O campo ($key) contem caracteres inválidos."
+                        'message'   => sprintf(FIELD_INVALID_CHARACTERS, $key)
                     ], 400);
 
                     return false;
@@ -50,7 +50,6 @@ class UserValidators {
         }
         catch (Exception $e) {
             Response::json([
-                'error'     => true,
                 'message'   => $e->getMessage()
             ], 400);
 
@@ -61,9 +60,9 @@ class UserValidators {
     public static function update(array $data) {
         try {
             $fields = [
-                'Nome'        => $data['name'] ?? '',
-                'Sobre nome'  => $data['lastName'] ?? '',
-                'E-mail'      => $data['email'] ?? '',
+                NAME_LABEL       => $data['name'] ?? '',
+                LAST_NAME_LABEL  => $data['lastName'] ?? '',
+                EMAIL_LABEL      => $data['email'] ?? '',
             ];
 
             Validator::validate($fields);
@@ -73,7 +72,7 @@ class UserValidators {
                     if(!TextValidator::email($value)) {
                         Response::json([
                             'error'     => true,
-                            'message'   => "O e-mail é invalido"
+                            'message'   => INVALID_EMAIL
                         ], 400);
 
                         return false;
@@ -84,8 +83,7 @@ class UserValidators {
 
                 if(!TextValidator::simpleText($value)) {
                     Response::json([
-                        'error'     => true,
-                        'message'   => "O campo ($key) contem caracteres inválidos."
+                        'message'   => sprintf(FIELD_INVALID_CHARACTERS, $key)
                     ], 400);
 
                     return false;
@@ -96,7 +94,6 @@ class UserValidators {
         }
         catch (Exception $e) {
             Response::json([
-                'error'     => true,
                 'message'   => $e->getMessage()
             ], 400);
 
@@ -115,8 +112,7 @@ class UserValidators {
 
             if(!TextValidator::email($data['email'])) {
                 Response::json([
-                    'error'     => true,
-                    'message'   => "O e-mail é invalido"
+                    'message'   => INVALID_EMAIL
                 ], 400);
 
                 return false;
@@ -125,7 +121,6 @@ class UserValidators {
             return true;
         } catch (Exception $e) {
             Response::json([
-                'error'     => true,
                 'message'   => $e->getMessage()
             ], 400);
 
@@ -143,8 +138,7 @@ class UserValidators {
 
             if(!TextValidator::email($data['email'])) {
                 Response::json([
-                    'error'     => true,
-                    'message'   => "O e-mail é invalido"
+                    'message'   => INVALID_EMAIL
                 ], 400);
 
                 return false;
@@ -153,7 +147,6 @@ class UserValidators {
             return true;
         } catch (Exception $e) {
             Response::json([
-                'error'     => true,
                 'message'   => $e->getMessage()
             ], 400);
 

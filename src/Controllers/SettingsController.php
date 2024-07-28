@@ -14,13 +14,13 @@ class SettingsController {
             updateSetting($requestData['name'], $requestData['setting']);
 
             $response->json([
-                "message" => "Configurações do site salvas com sucesso.",
+                "message" => SAVED_SITE_SETTINGS,
             ], 201);
             
         } catch (Exception $e) {
             logError($e->getMessage());
             return $response->json([
-                "message" => "Falha ao atualizar as configurações do site."
+                "message" => FATAL_ERROR
             ], 500);
         }
     }

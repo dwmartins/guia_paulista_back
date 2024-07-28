@@ -63,13 +63,13 @@ class AuthController {
             }
 
             return $response->json([
-                "message" => "Usuário ou senha inválidos."
+                "message" => INVALID_CREDENTIALS
             ], 401); 
             
         } catch (Exception $e) {
             logError($e->getMessage());
             return $response->json([
-                "message" => "Falha ao realizar o login"
+                "message" => FATAL_ERROR
             ], 500);
         }
     }
@@ -97,7 +97,7 @@ class AuthController {
 
                     } else if(isset($tokenDecode->expired)) {
                         return $response->json([
-                            "message"      => "Sua sessão expirou, realize o login novamente.",
+                            "message"      => SESSION_EXPIRED,
                             "expiredToken" => true,
                             "logout"       => true
                         ], 401);
@@ -106,14 +106,14 @@ class AuthController {
             }
 
             return $response->json([
-                "message" => "Realize o login para acessar esta área.",
+                "message" => NOT_LOGGED_IN,
                 "logout"  => true,
             ], 401);
 
         } catch (Exception $e) {
             logError($e->getMessage());
             return $response->json([
-                "message" => "Falha ao validar o usuário logado."
+                "message" => FATAL_ERROR
             ], 500);
         }
     }

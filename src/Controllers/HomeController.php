@@ -8,7 +8,13 @@ use App\Http\Response;
 class HomeController {
     public function index(Request $request, Response $response) {
         return $response->json([
-            "message" => "Bem vindo a API"
+            "message" => WELCOME_TO_API
+        ]);
+    }
+
+    public function test(Request $request, Response $response) {
+        return $response->json([
+            "message" => "finish"
         ]);
     }
 }

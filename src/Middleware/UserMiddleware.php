@@ -22,7 +22,7 @@ class UserMiddleware {
 
             if(!$token) {
                 return $response::json([
-                    "message" => "Realize o login novamente para continuar.",
+                    "message" => NOT_LOGGED_IN,
                     "logout"  => true
                 ], 401);
             }
@@ -35,21 +35,21 @@ class UserMiddleware {
 
                 if(!$decoded) {
                     return $response::json([
-                        "message" => "Realize o login novamente para continuar.",
+                        "message" => NOT_LOGGED_IN,
                         "logout"  => true
                     ], 401);
                 }
 
                 if(isset($decoded->expired)) {
                     return $response::json([
-                        "message" => "Sua sessão expirou, realize o login novamente.",
+                        "message" => SESSION_EXPIRED,
                         "logout"  => true
                     ], 401);
                 }
 
                 if(!in_array($user->getRole(), self::$allowedRoles)) {
                     return $response::json([
-                        "message"  => "Você não tem permissão para acessar essa área.",
+                        "message"  => NO_PERMISSION_TO_ACCESS,
                         "redirect" => true
                     ], 403);
                 }
@@ -59,7 +59,7 @@ class UserMiddleware {
 
             } else {
                 return $response::json([
-                    "message"  => "Realize o login novamente para continuar.",
+                    "message"  => NOT_LOGGED_IN,
                     "redirect" => true
                 ], 401);
             }
@@ -67,7 +67,7 @@ class UserMiddleware {
         } catch (Exception $e) {
             logError($e->getMessage());
             return $response->json([
-                "message"  => "Oops, Ocorreu um erro inesperado.",
+                "message"  => FATAL_ERROR,
                 "redirect" => true
             ], 500);
         }
@@ -83,7 +83,7 @@ class UserMiddleware {
 
             if($user->getRole() === "test") {
                 return $response::json([
-                    "message" => "Esta conta é apenas para teste, não tem permissões para editar, criar ou excluir algo."
+                    "message" => TEXT_MESSAGE_ACCOUNT
                 ], 403);
             }
 
@@ -98,19 +98,19 @@ class UserMiddleware {
                 }
 
                 return $response::json([
-                    "message" => "Você não tem permissão para executar essa ação."
+                    "message" => NOT_ALLOWED
                 ], 403);
                 
             }
 
             return $response::json([
-                "message" => "Você não tem permissão para executar essa ação."
+                "message" => NOT_ALLOWED
             ], 403);
 
         } catch (Exception $e) {
             logError($e->getMessage());
             return $response->json([
-                "message" => "Oops, Ocorreu um erro inesperado."
+                "message" => FATAL_ERROR
             ], 500);
         }
     }
@@ -125,7 +125,7 @@ class UserMiddleware {
 
             if($user->getRole() === "test") {
                 return $response::json([
-                    "message" => "Esta conta é apenas para teste, não tem permissões para editar, criar ou excluir algo."
+                    "message" => TEXT_MESSAGE_ACCOUNT
                 ], 403);
             }
 
@@ -141,13 +141,13 @@ class UserMiddleware {
             }
 
             return $response::json([
-                "message" => "Você não tem permissão para executar essa ação."
+                "message" => NOT_ALLOWED
             ], 403);
 
         } catch (Exception $e) {
             logError($e->getMessage());
             return $response->json([
-                "message" => "Oops, Ocorreu um erro inesperado."
+                "message" => FATAL_ERROR
             ], 500);
         }
     }
@@ -162,7 +162,7 @@ class UserMiddleware {
 
             if($user->getRole() === "test") {
                 return $response::json([
-                    "message" => "Esta conta é apenas para teste, não tem permissões para editar, criar ou excluir algo."
+                    "message" => TEXT_MESSAGE_ACCOUNT
                 ], 403);
             }
 
@@ -178,13 +178,13 @@ class UserMiddleware {
             }
 
             return $response::json([
-                "message" => "Você não tem permissão para executar essa ação."
+                "message" => NOT_ALLOWED
             ], 403);
 
         } catch (Exception $e) {
             logError($e->getMessage());
             return $response->json([
-                "message" => "Oops, Ocorreu um erro inesperado."
+                "message" => FATAL_ERROR
             ], 500);
         }
     }
@@ -199,7 +199,7 @@ class UserMiddleware {
 
             if($user->getRole() === "test") {
                 return $response::json([
-                    "message" => "Esta conta é apenas para teste, não tem permissões para editar, criar ou excluir algo."
+                    "message" => TEXT_MESSAGE_ACCOUNT
                 ], 403);
             }
 
@@ -215,14 +215,14 @@ class UserMiddleware {
             }
 
             return $response::json([
-                "message" => "Você não tem permissão para executar essa ação."
+                "message" => NOT_ALLOWED
             ], 403);
 
         } catch (Exception $e) {
             logError($e->getMessage());
             return $response->json([
                 "error"   => true,
-                "message" => "Oops, Ocorreu um erro inesperado."
+                "message" => FATAL_ERROR
             ], 500);
         }
     }
