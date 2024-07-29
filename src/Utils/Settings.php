@@ -29,7 +29,7 @@ function updateSetting($name, $newValue) {
 
         $values = [
             "name" => $name,
-            "setting" => $newValue
+            "value" => $newValue
         ];
 
         $setting->update($values);

@@ -6,19 +6,19 @@ use App\Models\SettingsDAO;
 
 class Settings {
     private string $name = "";
-    private string $setting = "";
+    private string $value = "";
 
-    public function __construct(array $setting = null) {
-        if(!empty($setting)) {
-            $this->name = $setting['name'];
-            $this->setting = $setting['setting'];
+    public function __construct(array $value = null) {
+        if(!empty($value)) {
+            $this->name = $value['name'];
+            $this->value = $value['value'];
         }
     }
 
     public function toArray(): array {
         return [
             "name"    => $this->name,
-            "setting" => $this->setting 
+            "value" => $this->value 
         ];
     }
 
@@ -30,12 +30,12 @@ class Settings {
         $this->name = $name;
     }
 
-    public function getSetting(): string {
-        return $this->setting;
+    public function getValue(): string {
+        return $this->value;
     }
 
-    public function setSetting($setting): void {
-        $this->setting = $setting;
+    public function setValue($value): void {
+        $this->value = $value;
     }   
 
     public function save() {
@@ -44,7 +44,7 @@ class Settings {
 
     public function update(array $values) {
         $this->name = $values["name"];
-        $this->setting = $values["setting"];
+        $this->value = $values["value"];
 
         SettingsDAO::update($this);
     }

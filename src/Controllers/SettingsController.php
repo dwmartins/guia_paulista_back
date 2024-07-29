@@ -11,7 +11,7 @@ class SettingsController {
         try {
             $requestData = $request->body();
 
-            updateSetting($requestData['name'], $requestData['setting']);
+            updateSetting($requestData['name'], $requestData['value']);
 
             $response->json([
                 "message" => SAVED_SITE_SETTINGS,

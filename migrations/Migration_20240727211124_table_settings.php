@@ -20,7 +20,7 @@ class Migration_20240727211124_table_settings extends Database{
         try {
             $sql = "CREATE TABLE IF NOT EXISTS settings (
                 name VARCHAR(250) PRIMARY KEY,
-                setting LONGTEXT
+                value LONGTEXT
             )";
 
             $stmt = $this->db->prepare($sql);
@@ -32,11 +32,11 @@ class Migration_20240727211124_table_settings extends Database{
         $settings = [
             [
                 "name" => "language",
-                "setting" => "pt-br"
+                "value" => "pt-br"
             ],
             [
                 "name" => "emailSending",
-                "setting" => "off"
+                "value" => "off"
             ]
         ];
 
