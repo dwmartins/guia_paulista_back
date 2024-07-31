@@ -33,7 +33,7 @@ class AuthController {
                             "email"     => $user->getEmail(),
                             "role"      => $user->getRole(),
                             "photo"     => $user->getPhoto(),
-                            "token"     => JWTManager::generate($user),
+                            "token"     => JWTManager::generate($user, $data['rememberMe'] ?? false),
                             "createdAt" => $user->getCreatedAt(),
                             "updatedAt" => $user->getUpdatedAt()
                         );

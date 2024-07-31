@@ -9,13 +9,16 @@ use Firebase\JWT\Key;
 use stdClass;
 
 class JWTManager {
-    public static function generate(User $user) {
+    public static function generate(User $user, bool $rememberMe) {
         $payload = array(
             "user_id" => $user->getId(),
             "email"   => $user->getEmail(),
-            "role"    => $user->getRole(),
-            "exp"     => time() + 3600
+            "role"    => $user->getRole()
         );
+
+        if(!$rememberMe) {
+            $payload["exp"] = time() + 3600;
+        }
         
         return JWT::encode($payload, $user->getToken(), 'HS256');
     }
