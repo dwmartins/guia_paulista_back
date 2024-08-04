@@ -14,6 +14,7 @@ class SiteInfo {
     private string $address = "";
     private string $instagram = "";
     private string $facebook = "";
+    private string $twitter = "";
     private string $description = "";
     private string $keywords = "";
     private string $ico = "";
@@ -44,6 +45,7 @@ class SiteInfo {
             'address'         => $this->address,
             'instagram'       => $this->instagram,
             'facebook'        => $this->facebook,
+            'twitter'         => $this->twitter,
             'description'     => $this->description,
             'keywords'        => $this->keywords,
             'ico'             => $this->ico,
@@ -125,6 +127,14 @@ class SiteInfo {
 
     public function setFacebook(string $facebook): void {
         $this->facebook = $facebook;
+    }
+
+    public function getTwitter(): string {
+        return $this->twitter;
+    }
+
+    public function setTwitter(string $twitter): void {
+        $this->twitter = $twitter;
     }
 
     public function getDescription(): string {

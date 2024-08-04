@@ -27,6 +27,7 @@ class Migration_20240727202451_table_site_info extends Database{
                 address VARCHAR(250),
                 instagram VARCHAR(250),
                 facebook VARCHAR(250),
+                twitter VARCHAR(250),
                 description LONGTEXT,
                 keywords LONGTEXT,
                 ico VARCHAR(250),
