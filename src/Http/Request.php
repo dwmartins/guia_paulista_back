@@ -54,12 +54,11 @@ class Request {
             return false;
         }
 
-        if(!isset($headers['userId']) || empty($headers['userId'])) {
-            return false;
-        }
-
         $token = $bearer[1];
-        $userId = $headers['userId'];
+
+        $payload = JWTManager::getPayload($token);
+
+        $userId = $payload['user_id'];
     
         return [
             "userId" => $userId,

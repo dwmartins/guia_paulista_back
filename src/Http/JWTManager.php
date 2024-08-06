@@ -45,4 +45,10 @@ class JWTManager {
 
         return $hexString;
     }
+
+    public static function getPayload(string $token) {
+        $base64Url = explode('.', $token)[1];
+        $base64 = str_replace(['-', '_'], ['+', '/'], $base64Url);
+        return json_decode(base64_decode($base64), true);
+    }
 }
