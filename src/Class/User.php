@@ -55,6 +55,7 @@ class User {
             "active"        => $this->active,
             "role"          => $this->role,
             "description"   => $this->description,
+            "phone"         => $this->phone,
             "photo"         => $this->photo,
             "dateOfBirth"   => $this->dateOfBirth,
             "address"       => $this->address,
