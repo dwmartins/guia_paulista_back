@@ -9,10 +9,12 @@ use App\Validators\UserValidators;
 use App\Class\User;
 use App\Class\UserPermissions;
 use App\Models\UserDAO;
+use App\Utils\UploadFile;
+use App\Validators\FileValidators;
 use Exception;
 
 class UserController {
-    private string $userImagesFolder = "userImages";
+    private string $userImagesFolder = "users";
     private array $permissions = [
         "users" => [
             "allowed" => false,
@@ -89,5 +91,47 @@ class UserController {
         }
 
         $permissions->save();
+    }
+
+    public function setPhoto(Request $request, Response $response) {
+        try {
+            $files = $request->files();
+
+            if(!isset($files['photo']) || empty($files['photo'])) {
+                return $response->json([
+                    'message' => NOT_IMAGES_SENT
+                ], 400);
+            }
+
+            $user = $request->getAttribute('userRequest');
+
+            $fileData = FileValidators::validImage($files['photo']);
+
+            if(isset($fileData['invalid'])) {
+                return $response->json([
+                    'message' => $fileData['invalid']
+                ], 400);
+            }
+            
+            $fileName = $user->getId() . "_user." . $fileData['mimeType'];
+            UploadFile::uploadFile($files['photo'], $this->userImagesFolder, $fileName);
+
+            $user->setPhoto($fileName);
+            $user->save();
+            
+            $userData = $user->toArray();
+            unset($userData['token']);
+            unset($userData['password']);
+
+            return $response->json([
+                "message" => UPDATED_IMAGE_USER,
+                "userData" => $userData
+            ], 201);
+        } catch (Exception $e) {
+            logError($e->getMessage());
+            return $response->json([
+                'message' => FATAL_ERROR
+            ], 500);
+        }
     }
 }

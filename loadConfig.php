@@ -52,7 +52,7 @@ if (!isCli() && DEV_MODE) {
 function setHeaders($allowed_origin) {
     header("Access-Control-Allow-Origin: $allowed_origin");
     header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-    header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, userId, token");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, token");
 
     if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
         header("HTTP/1.1 200 OK");

@@ -5,6 +5,8 @@ define("SAVED_SITE_SETTINGS", "Configurações do site salvas com sucesso.");
 define("SAVED_WEBSITE_INFORMATION", "Informações do site salvas com sucesso.");
 define("UPDATED_IMAGES", "Imagens atualizadas com sucesso");
 define("SAVE_SETTINGS", "Configurações salvas com sucesso.");
+define("UPDATED_IMAGE_USER", "Imagem atualizada com sucesso.");
+define("NOT_IMAGES_SENT", "Nenhuma imagem enviada.");
 
 // Users
 define("USER_CREATED", "Sua conta foi criada com sucesso.");
