@@ -19,7 +19,7 @@ class Migration_20240727211124_table_settings extends Database{
         // Migration implementation (up)
         try {
             $sql = "CREATE TABLE IF NOT EXISTS settings (
-                name VARCHAR(250) PRIMARY KEY,
+                name VARCHAR(255) PRIMARY KEY,
                 value LONGTEXT
             )";
 

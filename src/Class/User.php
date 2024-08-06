@@ -15,6 +15,11 @@ class User {
     private string $role = "visitor"; // ['support', 'admin', 'mod', 'sponsor', visitor, 'test']
     private string $description = "";
     private string $phone = "";
+    private string $dateOfBirth = "";
+    private string $address = "";
+    private string $city = "";
+    private string $zipCode = "";
+    private string $state = "";
     private string $photo = "";
     private string $acceptsEmails = "Y";
     private string $createdAt = "";
@@ -51,6 +56,11 @@ class User {
             "role"          => $this->role,
             "description"   => $this->description,
             "photo"         => $this->photo,
+            "dateOfBirth"   => $this->dateOfBirth,
+            "address"       => $this->address,
+            "city"          => $this->city,
+            "zipCode"       => $this->zipCode,
+            "state"         => $this->state,
             "acceptsEmails" => $this->acceptsEmails,
             "createdAt"     => $this->createdAt,
             "updatedAt"     => $this->updatedAt,
@@ -143,6 +153,47 @@ class User {
 
     public function setPhoto(string $photo): void {
         $this->photo = $photo;
+    }
+
+    // Getter e Setter para dateOfBirth
+    public function getDateOfBirth(): string {
+        return $this->dateOfBirth;
+    }
+
+    public function setDateOfBirth(string $dateOfBirth): void {
+        $this->dateOfBirth = $dateOfBirth;
+    }
+
+    public function getAddress(): string {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): void {
+        $this->address = $address;
+    }
+
+    public function getCity(): string {
+        return $this->city;
+    }
+
+    public function setCity(string $city): void {
+        $this->city = $city;
+    }
+
+    public function getZipCode(): string {
+        return $this->zipCode;
+    }
+
+    public function setZipCode(string $zipCode): void {
+        $this->zipCode = $zipCode;
+    }
+
+    public function getState(): string {
+        return $this->state;
+    }
+
+    public function setState(string $state): void {
+        $this->state = $state;
     }
 
     public function getAcceptsEmails(): string {

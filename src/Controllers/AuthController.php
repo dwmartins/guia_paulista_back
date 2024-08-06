@@ -26,17 +26,11 @@ class AuthController {
             if($user->fetchByEmail($data["email"])) {
                 if($user->getActive() === "Y") {
                     if(password_verify($data["password"], $user->getPassword())) {
-                        $userData = array(
-                            "id"        => $user->getId(),
-                            "name"      => $user->getName(),
-                            "lastName"  => $user->getLastName(),
-                            "email"     => $user->getEmail(),
-                            "role"      => $user->getRole(),
-                            "photo"     => $user->getPhoto(),
-                            "token"     => JWTManager::generate($user, $data['rememberMe'] ?? false),
-                            "createdAt" => $user->getCreatedAt(),
-                            "updatedAt" => $user->getUpdatedAt()
-                        );
+                        $userData = $user->toArray();
+                        unset($userData['password']);
+                        unset($userData['token']);
+
+                        $userData['token'] = JWTManager::generate($user, $data['rememberMe'] ?? false);
 
                         if($user->getRole() === "mod") {
                             $userPermissions = new UserPermissions();

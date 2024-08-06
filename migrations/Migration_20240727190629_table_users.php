@@ -18,7 +18,6 @@ class Migration_20240727190629_table_users extends Database{
     public function up() {
         // Migration implementation (up)
         try {
-            //Cria a tabela de usuários
             $sql = "CREATE TABLE IF NOT EXISTS users (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 name VARCHAR(50) NOT NULL,
@@ -30,11 +29,16 @@ class Migration_20240727190629_table_users extends Database{
                 role VARCHAR(50) NOT NULL,
                 description LONGTEXT,
                 phone VARCHAR(50),
+                dateOfBirth DATE,
+                address VARCHAR(255),
+                city VARCHAR(100),
+                zipCode VARCHAR(20),
+                state VARCHAR(50),
                 photo VARCHAR(255),
                 acceptsEmails ENUM('Y', 'N'),
                 createdAt DATETIME,
-                updatedAt DATETIME);
-            ";
+                updatedAt DATETIME
+            );";
 
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
