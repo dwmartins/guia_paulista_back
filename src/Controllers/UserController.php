@@ -134,4 +134,47 @@ class UserController {
             ], 500);
         }
     }
+
+    public function update(Request $request, Response $response) {
+        try {
+            $requestBody = $request->body();
+            $user = $request->getAttribute('userRequest');
+
+            if(!UserValidators::update($requestBody)) {
+                return;
+            }
+
+            $emailExists = UserDAO::fetchByEmail($requestBody['email']);
+
+            if($emailExists && $emailExists['id'] != $user->getId()) {
+                return $response->json([
+                    'message'   => EMAIL_IN_USE
+                ], 409);
+            }
+
+            $user->update($requestBody);
+
+            if(!empty($requestBody['newPassword'])) {
+                $user->setPassword($requestBody['newPassword']);
+            }
+
+            $user->save();
+
+            $userData = $user->toArray();
+            unset($userData['password']);
+            unset($userData['token']);
+
+            return $response->json([
+                'message'   => USER_UPDATE,
+                'userData' =>  $userData
+            ], 201);
+
+
+        } catch (Exception $e) {
+            logError($e->getMessage());
+            return $response->json([
+                'message' => FATAL_ERROR
+            ], 500);
+        }
+    }
 }

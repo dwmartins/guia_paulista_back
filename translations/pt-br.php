@@ -19,6 +19,7 @@ define("EMAIL_IN_USE", "Este e-mail já está em uso.");
 define("NO_PERMISSION_TO_ACCESS", "Você não tem permissão para acessar essa área.");
 define("TEXT_MESSAGE_ACCOUNT", "Esta conta é apenas para fins de teste, ela não tem permissão para editar, criar ou excluir conteúdos.");
 define("NOT_ALLOWED", "Você não tem permissão para executar esta ação.");
+define("USER_UPDATE", "Usuário atualizado com sucesso.");
 
 // Errors
 define("FATAL_ERROR", "Ops, ocorreu um erro, tente novamente.");
@@ -29,6 +30,7 @@ define("LARGE_FILE", "O arquivo não pode exceder 5MB.");
 define("UPLOAD_ERROR", "Erro durante o upload do arquivo.");
 define("UNSUPPORTED_ICO", "O arquivo deve ser um ícone ICO ou JPG, JPEG ou PNG.");
 define("INVALID_EMAIL" , "O e-mail é invalido");
+define("INVALID_PHONE", "O telefone é invalido");
 define("INVALID_FIELD_ERROR", "O campo (%s) é inválido");
 define("FIELD_INVALID_CHARACTERS", "O campo (%s) contém caracteres inválidos.");
 define("REQUIRED_FIELD", "O campo (%s) é obrigatório");

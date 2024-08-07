@@ -63,7 +63,16 @@ class UserValidators {
                 NAME_LABEL       => $data['name'] ?? '',
                 LAST_NAME_LABEL  => $data['lastName'] ?? '',
                 EMAIL_LABEL      => $data['email'] ?? '',
+                DESCRIPTION_LABEL => $data['description'] ?? '',
             ];
+
+            if(!TextValidator::isNumeric($data['phone'])) {
+                Response::json([
+                    'message'   => INVALID_PHONE
+                ], 400);
+
+                return false;
+            }
 
             Validator::validate($fields);
 
