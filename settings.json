@@ -1,5 +1,6 @@
 {
     "language": "pt-br",
     "emailSending": "on",
-    "timezone": "America/Sao_Paulo"
+    "timezone": "America/Sao_Paulo",
+    "dateFormat": "d/m/Y"
 }

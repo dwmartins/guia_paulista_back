@@ -37,6 +37,14 @@ class Migration_20240727211124_table_settings extends Database{
             [
                 "name" => "emailSending",
                 "value" => "off"
+            ],
+            [
+                "name" => "timezone",
+                "value" => "America/Sao_Paulo"
+            ],
+            [
+                "name" => "dateFormat",
+                "value" => "DD-MM-YYYY"
             ]
         ];
 
