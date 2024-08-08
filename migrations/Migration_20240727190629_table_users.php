@@ -29,7 +29,7 @@ class Migration_20240727190629_table_users extends Database{
                 role VARCHAR(50) NOT NULL,
                 description LONGTEXT,
                 phone VARCHAR(50),
-                dateOfBirth DATE,
+                dateOfBirth DATE NULL,
                 address VARCHAR(255),
                 city VARCHAR(100),
                 zipCode VARCHAR(20),

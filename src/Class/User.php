@@ -15,7 +15,7 @@ class User {
     private string $role = "visitor"; // ['support', 'admin', 'mod', 'sponsor', visitor, 'test']
     private string $description = "";
     private string $phone = "";
-    private string $dateOfBirth = "";
+    private ?string $dateOfBirth = null;
     private string $address = "";
     private string $city = "";
     private string $zipCode = "";
