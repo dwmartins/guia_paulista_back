@@ -14,17 +14,13 @@ class TextValidator {
     }
 
     public static function simpleText(string $field) {
-        $simpleText = "/^[a-zA-Z\s]+$/";
+        $simpleText = "/^[\p{L}\s]+$/u";
 
-        if(!preg_match($simpleText, $field)) {
+        if(!empty($field) && !preg_match($simpleText, $field)) {
             return false;
         }
 
         return true;
-    }
-
-    public static function isNumeric(int $field): bool {
-        return ctype_digit($field);
     }
 
     public static function email(string $email) {

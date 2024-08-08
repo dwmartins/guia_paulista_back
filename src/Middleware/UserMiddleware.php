@@ -30,6 +30,59 @@ class UserMiddleware {
             $user = new User();
             $user->fetchById($userId);
 
+            if(!empty($user->getId()) && $user->getActive() === "Y") {
+                $decoded = JWTManager::validate($token, $user);
+
+                if(!$decoded) {
+                    return $response::json([
+                        "message" => NOT_LOGGED_IN,
+                        "logout"  => true
+                    ], 401);
+                }
+
+                if(isset($decoded->expired)) {
+                    return $response::json([
+                        "message" => SESSION_EXPIRED,
+                        "logout"  => true
+                    ], 401);
+                }
+
+                $request->setAttribute("userRequest", $user);
+                return true;
+
+            } else {
+                return $response::json([
+                    "message"  => NOT_LOGGED_IN,
+                    "redirect" => true
+                ], 401);
+            }
+
+        } catch (Exception $e) {
+            logError($e->getMessage());
+            return $response->json([
+                "message"  => FATAL_ERROR,
+                "redirect" => true
+            ], 500);
+        }
+    }
+
+    public static function isAdmin(Request $request, Response $response) {
+        try {
+            $headers = $request->authorization();
+
+            $token  = $headers["token"] ?? "";
+            $userId = $headers["userId"] ?? "";
+
+            if(!$token) {
+                return $response::json([
+                    "message" => NOT_LOGGED_IN,
+                    "logout"  => true
+                ], 401);
+            }
+
+            $user = new User();
+            $user->fetchById($userId);
+
             if(!empty($user) && $user->getActive() === "Y") {
                 $decoded = JWTManager::validate($token, $user);
 

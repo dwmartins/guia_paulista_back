@@ -9,6 +9,8 @@ use Exception;
 class UserValidators {
     public static function create(array $data) {
         try {
+            $isValid = true;
+
             $fields = [
                 NAME_LABEL       => $data['name'] ?? '',
                 LAST_NAME_LABEL  => $data['lastName'] ?? '',
@@ -26,7 +28,8 @@ class UserValidators {
                             'message'   => INVALID_EMAIL
                         ], 400);
 
-                        return false;
+                        $isValid = false;
+                        break;
                     }
 
                     continue;
@@ -42,11 +45,12 @@ class UserValidators {
                         'message'   => sprintf(FIELD_INVALID_CHARACTERS, $key)
                     ], 400);
 
-                    return false;
+                    $isValid = false;
+                    break;
                 }
             }
 
-            return true;
+            return $isValid;
         }
         catch (Exception $e) {
             Response::json([
@@ -59,32 +63,67 @@ class UserValidators {
 
     public static function update(array $data) {
         try {
+            $isValid = true;
+
             $fields = [
+                NAME_LABEL        => $data['name'] ?? '',
+                LAST_NAME_LABEL   => $data['lastName'] ?? '',
+                EMAIL_LABEL       => $data['email'] ?? '',
+                DESCRIPTION_LABEL => $data['description'] ?? '',
+                PHONE_LABEL       => $data['phone'] ?? '',
+                ADDRESS_LABEL     => $data['address'] ?? '',
+                CITY_LABEL        => $data['city'] ?? '',
+                ZIP_CODE_LABEL    => $data['zipCode'] ?? '',
+                STATE_LABEL       => $data['state'] ?? '',
+            ];
+
+            $requiredFields = [
                 NAME_LABEL       => $data['name'] ?? '',
                 LAST_NAME_LABEL  => $data['lastName'] ?? '',
                 EMAIL_LABEL      => $data['email'] ?? '',
-                DESCRIPTION_LABEL => $data['description'] ?? '',
             ];
 
-            if(!TextValidator::isNumeric($data['phone'])) {
-                Response::json([
-                    'message'   => INVALID_PHONE
-                ], 400);
-
-                return false;
-            }
-
-            Validator::validate($fields);
+            Validator::validate($requiredFields);
 
             foreach ($fields as $key => $value) {
+                if(empty($value)) {
+                    continue;
+                }
+
                 if($key === EMAIL_LABEL) {
                     if(!TextValidator::email($value)) {
                         Response::json([
-                            'error'     => true,
                             'message'   => INVALID_EMAIL
                         ], 400);
 
-                        return false;
+                        $isValid = false;
+                        break;
+                    }
+
+                    continue;
+                }
+
+                if($key === PHONE_LABEL || $key === ZIP_CODE_LABEL) {
+                    if(!is_numeric($value)) {
+                        Response::json([
+                            'message'   => $key === PHONE_LABEL ? INVALID_PHONE : INVALID_ZIP_CODE
+                        ], 400);
+
+                        $isValid = false;
+                        break;
+                    }
+
+                    continue;
+                }
+
+                if($key === DESCRIPTION_LABEL) {
+                    if(!TextValidator::fullText($value)) {
+                        Response::json([
+                            'message'   => sprintf(FIELD_INVALID_CHARACTERS, $key)
+                        ], 400);
+
+                        $isValid = false;
+                        break;
                     }
 
                     continue;
@@ -95,11 +134,12 @@ class UserValidators {
                         'message'   => sprintf(FIELD_INVALID_CHARACTERS, $key)
                     ], 400);
 
-                    return false;
+                    $isValid = false;
+                    break;
                 }
             }
 
-            return true;
+            return $isValid;
         }
         catch (Exception $e) {
             Response::json([

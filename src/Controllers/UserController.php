@@ -11,6 +11,7 @@ use App\Class\UserPermissions;
 use App\Models\UserDAO;
 use App\Utils\UploadFile;
 use App\Validators\FileValidators;
+use DateTime;
 use Exception;
 
 class UserController {
