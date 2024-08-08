@@ -38,7 +38,7 @@ class SiteInfoValidator {
             }
 
             if($key === INSTAGRAM_LABEL || $key === FACEBOOK_LABEL) {
-                if(!TextValidator::isValidUrl($value)) {
+                if(!TextValidator::url($value)) {
                     Response::json([
                         'message'   => sprintf(INVALID_FIELD_ERROR, $key)
                     ], 400);
@@ -49,7 +49,7 @@ class SiteInfoValidator {
                 continue;
             }
 
-            if(!TextValidator::fullText($value)) {
+            if(!TextValidator::text($value)) {
                 Response::json([
                     'message'   => sprintf(FIELD_INVALID_CHARACTERS, $key)
                 ], 400);

@@ -19,7 +19,7 @@ class EmailConfigValidator {
 
             foreach ($fields as $key => $value) {
                 if($key === SERVER) {
-                    if(!TextValidator::emailServer($value)) {
+                    if(!TextValidator::email($value)) {
                         Response::json([
                             'error'     => true,
                             'message'   => sprintf(INVALID_FIELD_ERROR, $key)
