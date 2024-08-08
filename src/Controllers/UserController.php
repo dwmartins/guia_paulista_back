@@ -113,6 +113,10 @@ class UserController {
                     'message' => $fileData['invalid']
                 ], 400);
             }
+
+            if(!empty($user->getPhoto())) {
+                UploadFile::removeFile($user->getPhoto(), $this->userImagesFolder);
+            }
             
             $fileName = $user->getId() . "_user." . $fileData['mimeType'];
             UploadFile::uploadFile($files['photo'], $this->userImagesFolder, $fileName);
