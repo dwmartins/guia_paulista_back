@@ -45,6 +45,10 @@ class Migration_20240727211124_table_settings extends Database{
             [
                 "name" => "dateFormat",
                 "value" => "DD-MM-YYYY"
+            ],
+            [
+                "name" => "compressImage",
+                "value" => "on"
             ]
         ];
 
