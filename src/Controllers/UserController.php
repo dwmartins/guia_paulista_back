@@ -236,4 +236,27 @@ class UserController {
             ], 500);
         }
     }
+
+    public function delete(Request $request, Response $response, $params) {
+        try {
+            $user = new User();
+            $user->fetchById($params[0]);
+
+            if(!empty($user->getPhoto())) {
+                UploadFile::removeFile($user->getPhoto(), $this->userImagesFolder);
+            }
+
+            $user->delete();
+
+            return $response->json([
+                'message'   => DELETE_ACCOUNT,
+            ], 201);
+
+        } catch (Exception $e) {
+            logError($e->getMessage());
+            return $response->json([
+                'message' => FATAL_ERROR
+            ], 500);
+        }
+    }
 }

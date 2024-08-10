@@ -22,6 +22,7 @@ define("NOT_ALLOWED", "Você não tem permissão para executar esta ação.");
 define("USER_UPDATE", "Usuário atualizado com sucesso.");
 define("ADDRESS_UPDATE", "Informações de endereço atualizadas com sucesso.");
 define("CONFIG_USER_UPDATE", "Configurações salvas com sucesso.");
+define("DELETE_ACCOUNT", "Sua conta foi deletada com sucesso.");
 
 // Errors
 define("FATAL_ERROR", "Ops, ocorreu um erro, tente novamente.");

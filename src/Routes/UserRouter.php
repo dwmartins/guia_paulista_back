@@ -20,3 +20,7 @@ Route::put('/user/settings', 'UserController@updateSettings', [
 Route::post('/user/update-image', 'UserController@setPhoto', [
     [UserMiddleware::class, 'isAuth']
 ]);
+
+Route::delete('/user/{id}', 'UserController@delete', [
+    [UserMiddleware::class, 'isAuth']
+]);
