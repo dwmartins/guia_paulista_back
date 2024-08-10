@@ -182,4 +182,58 @@ class UserController {
             ], 500);
         }
     }
+
+    public function updateAddress(Request $request, Response $response) {
+        try {
+            $requestBody = $request->body();
+            $user = $request->getAttribute('userRequest');
+
+            if(!UserValidators::updateAddress($requestBody)) {
+                return;
+            }
+
+            $user->update($requestBody);
+            $user->save();
+
+            $userData = $user->toArray();
+            unset($userData['password']);
+            unset($userData['token']);
+
+            return $response->json([
+                'message'   => ADDRESS_UPDATE,
+                'userData' =>  $userData
+            ], 201);
+
+        } catch (Exception $e) {
+            logError($e->getMessage());
+            return $response->json([
+                'message' => FATAL_ERROR
+            ], 500);
+        }
+    }
+
+    public function updateSettings(Request $request, Response $response) {
+        try {
+            $requestBody = $request->body();
+            $user = $request->getAttribute('userRequest');
+
+            $user->update($requestBody);
+            $user->save();
+
+            $userData = $user->toArray();
+            unset($userData['password']);
+            unset($userData['token']);
+
+            return $response->json([
+                'message'   => CONFIG_USER_UPDATE,
+                'userData' =>  $userData
+            ], 201);
+
+        } catch (Exception $e) {
+            logError($e->getMessage());
+            return $response->json([
+                'message' => FATAL_ERROR
+            ], 500);
+        }
+    }
 }

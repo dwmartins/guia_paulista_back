@@ -20,6 +20,8 @@ define("NO_PERMISSION_TO_ACCESS", "Você não tem permissão para acessar essa �
 define("TEXT_MESSAGE_ACCOUNT", "Esta conta é apenas para fins de teste, ela não tem permissão para editar, criar ou excluir conteúdos.");
 define("NOT_ALLOWED", "Você não tem permissão para executar esta ação.");
 define("USER_UPDATE", "Usuário atualizado com sucesso.");
+define("ADDRESS_UPDATE", "Informações de endereço atualizadas com sucesso.");
+define("CONFIG_USER_UPDATE", "Configurações salvas com sucesso.");
 
 // Errors
 define("FATAL_ERROR", "Ops, ocorreu um erro, tente novamente.");

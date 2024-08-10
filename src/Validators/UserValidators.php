@@ -140,6 +140,43 @@ class UserValidators {
         }
     }
 
+    public static function updateAddress(array $data) {
+        $fields = [
+            ADDRESS_LABEL     => $data['address'] ?? '',
+            CITY_LABEL        => $data['city'] ?? '',
+            ZIP_CODE_LABEL    => $data['zipCode'] ?? '',
+            STATE_LABEL       => $data['state'] ?? '',
+        ];
+
+        foreach ($fields as $key => $value) {
+            if(empty($value)) {
+                continue;
+            }
+
+            if($key === ZIP_CODE_LABEL) {
+                if(!is_numeric($value)) {
+                    Response::json([
+                        'message'   => INVALID_ZIP_CODE
+                    ], 400);
+
+                    return false;
+                }
+
+                continue;
+            }
+
+            if(!TextValidator::text($value)) {
+                Response::json([
+                    'message'   => sprintf(FIELD_INVALID_CHARACTERS, $key)
+                ], 400);
+
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public static function login(array $data) {
         try {
             $fields = [
