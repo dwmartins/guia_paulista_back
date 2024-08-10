@@ -36,6 +36,7 @@ class Migration_20240727190629_table_users extends Database{
                 state VARCHAR(50),
                 photo VARCHAR(255),
                 acceptsEmails ENUM('Y', 'N'),
+                publishContactInfo ENUM('Y', 'N'),
                 createdAt DATETIME,
                 updatedAt DATETIME
             );";

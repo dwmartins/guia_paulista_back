@@ -22,6 +22,7 @@ class User {
     private string $state = "";
     private string $photo = "";
     private string $acceptsEmails = "Y";
+    private string $publishContactInfo = "N";
     private string $createdAt = "";
     private string $updatedAt = "";
 
@@ -46,25 +47,26 @@ class User {
 
     public function toArray(): array {
         return [
-            "id"            => $this->id,
-            "name"          => $this->name,
-            "lastName"      => $this->lastName,
-            "email"         => $this->email,
-            "password"      => $this->password,
-            "token"         => $this->token,
-            "active"        => $this->active,
-            "role"          => $this->role,
-            "description"   => $this->description,
-            "phone"         => $this->phone,
-            "photo"         => $this->photo,
-            "dateOfBirth"   => $this->dateOfBirth,
-            "address"       => $this->address,
-            "city"          => $this->city,
-            "zipCode"       => $this->zipCode,
-            "state"         => $this->state,
-            "acceptsEmails" => $this->acceptsEmails,
-            "createdAt"     => $this->createdAt,
-            "updatedAt"     => $this->updatedAt,
+            "id"                    => $this->id,
+            "name"                  => $this->name,
+            "lastName"              => $this->lastName,
+            "email"                 => $this->email,
+            "password"              => $this->password,
+            "token"                 => $this->token,
+            "active"                => $this->active,
+            "role"                  => $this->role,
+            "description"           => $this->description,
+            "phone"                 => $this->phone,
+            "photo"                 => $this->photo,
+            "dateOfBirth"           => $this->dateOfBirth,
+            "address"               => $this->address,
+            "city"                  => $this->city,
+            "zipCode"               => $this->zipCode,
+            "state"                 => $this->state,
+            "acceptsEmails"         => $this->acceptsEmails,
+            "publishContactInfo"    => $this->publishContactInfo,
+            "createdAt"             => $this->createdAt,
+            "updatedAt"             => $this->updatedAt,
         ];
     }
 
@@ -203,6 +205,14 @@ class User {
 
     public function setAcceptsEmails(string $acceptsEmails): void {
         $this->photo = $acceptsEmails;
+    }
+
+    public function getPublishContactInfo(): string {
+        return $this->publishContactInfo;
+    }
+
+    public function setPublishContactInfo(string $info): void {
+        $this->publishContactInfo = $info;
     }
 
     public function getCreatedAt(): string {
