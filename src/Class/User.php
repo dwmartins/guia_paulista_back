@@ -238,10 +238,6 @@ class User {
 
     public function update(array $user): void {
         foreach ($user as $key => $value) {
-            if(empty($value)) {
-                continue;
-            }
-
             if (property_exists($this, $key)) {
                 if($key === "password") {
                     $this->password = $this->isPasswordHashed($value) ? $value : password_hash($value, PASSWORD_DEFAULT);
