@@ -259,4 +259,36 @@ class UserController {
             ], 500);
         }
     }
+
+    public function updatePassword(Request $request, Response $response) {
+        try {
+            $requestBody = $request->body();
+            $user = $request->getAttribute('userRequest');
+
+            if($requestBody['newPassword'] != $requestBody['confirmPassword']) {
+                return $response->json([
+                    'message'   => PASSWORDS_NOT_MATCH,
+                ], 400);
+            }
+
+            if(!password_verify($requestBody['currentPassword'], $user->getPassword())) {
+                return $response->json([
+                    'message'   => PASSWORD_INCORRECT,
+                ], 400);
+            }
+
+            $user->setPassword($requestBody['newPassword']);
+            $user->save();
+
+            return $response->json([
+                'message'   => PASSWORD_UPDATE
+            ], 201);
+
+        } catch (Exception $e) {
+            logError($e->getMessage());
+            return $response->json([
+                'message' => FATAL_ERROR
+            ], 500);
+        }
+    }
 }

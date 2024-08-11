@@ -23,6 +23,9 @@ define("USER_UPDATE", "User updated successfully.");
 define("ADDRESS_UPDATE", "Address information updated successfully.");
 define("CONFIG_USER_UPDATE", "Settings saved successfully.");
 define("DELETE_ACCOUNT", "Your account has been deleted successfully.");
+define("PASSWORDS_NOT_MATCH", "Passwords do not match.");
+define("PASSWORD_INCORRECT", "Current password is incorrect. Please make sure you have entered the correct password.");
+define("PASSWORD_UPDATE", "Your password has been changed successfully.");
 
 // Errors
 define("FATAL_ERROR", "Oops, an error occurred, please try again.");
