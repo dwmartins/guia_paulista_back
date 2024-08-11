@@ -20,6 +20,10 @@ class SendEmailValidators {
         $fields[COMPANY_LABEL] = $data['company'];
 
         foreach ($fields as $key => $value) {
+            if(empty($value)) {
+                continue;
+            }
+
             if($key === EMAIL_LABEL) {
                 if(!TextValidator::email($value)) {
                     Response::json([
@@ -43,15 +47,15 @@ class SendEmailValidators {
     
                 continue;
             }
-        }
 
-        if(!TextValidator::text($value)) {
-            Response::json([
-                'error'     => true,
-                'message'   => sprintf(FIELD_INVALID_CHARACTERS, $key)
-            ], 400);
-
-            return false;
+            if(!TextValidator::text($value)) {
+                Response::json([
+                    'error'     => true,
+                    'message'   => sprintf(FIELD_INVALID_CHARACTERS, $key)
+                ], 400);
+    
+                return false;
+            }
         }
 
         return true;

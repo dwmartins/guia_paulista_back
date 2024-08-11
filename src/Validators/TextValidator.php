@@ -50,7 +50,7 @@ class TextValidator {
     public static function text(string $text): bool
     {
         return v::stringType()
-            ->regex('/^[\p{L}\p{N}\s,.\'\"!?()\-@#&*]+$/u')
+            ->regex('/^[\p{L}\p{N}\s,.\'\"!?()\-@#&*:+]+$/u')
             ->validate($text);
     }
 

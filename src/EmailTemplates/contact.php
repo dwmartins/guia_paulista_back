@@ -46,7 +46,11 @@
         <p><strong>Nome:</strong> <?php echo "{CONTACT_NAME}"; ?></p>
         <p><strong>Sobrenome:</strong> <?php echo "{CONTACT_LASTNAME}"; ?></p>
         <p><strong>E-mail:</strong> <?php echo "{CONTACT_EMAIL}"; ?></p>
-        <p><strong>Empresa:</strong> <?php echo "{CONTACT_COMPANY}"; ?></p>
+
+        <?php if(!empty($requestData['company'])) { ?>
+            <p><strong>Empresa:</strong> <?php echo "{CONTACT_COMPANY}"; ?></p>
+        <?php } ?>
+
         <p><strong>Mensagem:</strong></p>
         <p><?php echo "{CONTACT_MESSAGE}"; ?></p>
         
