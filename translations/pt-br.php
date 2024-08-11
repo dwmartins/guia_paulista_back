@@ -26,6 +26,7 @@ define("DELETE_ACCOUNT", "Sua conta foi deletada com sucesso.");
 define("PASSWORDS_NOT_MATCH", "As senhas não coincidem.");
 define("PASSWORD_INCORRECT", "Senha atual incorreta. Certifique-se de que você inseriu a senha correta.");
 define("PASSWORD_UPDATE", "Sua senha foi alterada com sucesso.");
+define("MESSAGE_SENT", "Sua mensagem foi encaminhada com sucesso.");
 
 // Errors
 define("FATAL_ERROR", "Ops, ocorreu um erro, tente novamente.");
@@ -60,6 +61,8 @@ define("PASSWORD_LABEL", "Senha");
 define("SERVER", "Servidor");
 define("EMAIL_ADDRESS", "Endereço de e-mail");
 define("USER_NAME", "Nome de usuário");
+define("MESSAGE_LABEL" , "Mensagem");
+define("COMPANY_LABEL", "Empresa");
 
 // Email Templates
 // WELCOME
@@ -76,3 +79,7 @@ define("FEATURE_4", "Avaliações e feedback valiosos da comunidade");
 define("FEATURE_5", "Gerenciamento eficiente de suas campanhas publicitárias");
 define("HELP_MESSAGE", "Estamos aqui para ajudá-lo a obter o máximo impacto com suas propagandas!");
 define("SIGNATURE", "Atenciosamente, <br> Equipe do");
+
+// CONTACT
+define("CONTACT_INFORMATION", "Informações de Contato:");
+define("WEBSITE_MESSAGE", "Mensagem do site");

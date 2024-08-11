@@ -53,7 +53,7 @@ class SendEmail {
     }
 
     public function send(SiteInfo $siteInfo = null) {
-        if(loadFileSettings("emailSending") === "off") {
+        if(getSetting("emailSending") === "off") {
             return;
         }
 

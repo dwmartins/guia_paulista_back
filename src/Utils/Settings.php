@@ -5,7 +5,8 @@ use App\Models\SettingsDAO;
 
 function getSetting(string $name) {
     try {
-        return SettingsDAO::fetchByName($name);
+        $setting = SettingsDAO::fetchByName($name);
+        return $setting['value'] ?: [];
     } catch (Exception $e) {
         logError($e);
         throw new Exception("Error fetching setting");
