@@ -15,7 +15,7 @@ class CategoryValidator {
         if(empty($data['name'])) {
             Response::json([
                 'message' => sprintf(REQUIRED_FIELD, NAME_LABEL)
-            ]);
+            ], 400);
 
             return false;
         }
