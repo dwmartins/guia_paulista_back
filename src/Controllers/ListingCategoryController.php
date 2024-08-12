@@ -17,14 +17,14 @@ class ListingCategoryController {
         try {
             $data = $request->body();
             $files = $request->files();
+            $iconData = "";
+            $photoData = "";
 
             $category = new ListingCategory($data);
 
             if(!CategoryValidator::create($data)) {
                 return;
             }
-
-            $category->save();
 
             if(!empty($files['icon']) || !empty($files['photo'])) {
                 $errors = "";
@@ -34,22 +34,14 @@ class ListingCategoryController {
 
                     if(isset($iconData['invalid'])) {
                         $errors = $iconData['invalid'];
-                    } else {
-                        $iconName = $category->getId() . "_icon." . $iconData['mimeType'];
-                        UploadFile::uploadFile($files['icon'], $this->categoryImagesFolder, $iconName);
-                        $category->setIcon($iconName);
                     }
                 }
 
                 if(!empty($files['photo'])) {
-                    $photoData = FileValidators::validIcon($files['photo']);
+                    $photoData = FileValidators::validImage($files['photo']);
 
                     if(isset($photoData['invalid'])) {
-                        $errors = isset($photoData['invalid']);
-                    } else {
-                        $photoName = $category->getId() . "_photo." . $photoData['mimeType'];
-                        UploadFile::uploadFile($files['photo'], $this->categoryImagesFolder, $photoName);
-                        $category->setPhoto($photoName);
+                        $errors = $photoData['invalid'];
                     }
                 }
 
@@ -58,15 +50,29 @@ class ListingCategoryController {
                         'message' => $errors
                     ], 400);
                 }
+            }
+
+            $category->save();
+
+            if(!empty($iconData) || !empty($photoData)) {
+                if(!empty($iconData)) {
+                    $iconName = $category->getId() . "_icon." . $iconData['mimeType'];
+                    UploadFile::uploadFile($files['icon'], $this->categoryImagesFolder, $iconName);
+                    $category->setIcon($iconName);
+                }
+
+                if(!empty($photoData)) {
+                    $photoName = $category->getId() . "_photo." . $photoData['mimeType'];
+                    UploadFile::uploadFile($files['photo'], $this->categoryImagesFolder, $photoName);
+                    $category->setPhoto($photoName);
+                }
 
                 $category->save();
             }
 
-            $categoryData = $category->toArray();
-
             return $response->json([
                 "message" => CATEGORY_CREATED,
-                "categoryData" => $categoryData
+                "categoryData" => $category->toArray()
             ], 201);
 
         } catch (Exception $e) {
