@@ -43,15 +43,15 @@
         <h1><?php echo "{SITENAME}" ?></h1>
         
         <h2><?php echo CONTACT_INFORMATION ?></h2>
-        <p><strong>Nome:</strong> <?php echo "{CONTACT_NAME}"; ?></p>
-        <p><strong>Sobrenome:</strong> <?php echo "{CONTACT_LASTNAME}"; ?></p>
-        <p><strong>E-mail:</strong> <?php echo "{CONTACT_EMAIL}"; ?></p>
+        <p><strong><?php echo NAME_LABEL.':' ?></strong> <?php echo "{CONTACT_NAME}"; ?></p>
+        <p><strong><?php echo LAST_NAME_LABEL.':' ?></strong> <?php echo "{CONTACT_LASTNAME}"; ?></p>
+        <p><strong><?php echo EMAIL_LABEL.':' ?></strong> <?php echo "{CONTACT_EMAIL}"; ?></p>
 
         <?php if(!empty($requestData['company'])) { ?>
-            <p><strong>Empresa:</strong> <?php echo "{CONTACT_COMPANY}"; ?></p>
+            <p><strong><?php echo COMPANY_LABEL.':' ?></strong> <?php echo "{CONTACT_COMPANY}"; ?></p>
         <?php } ?>
 
-        <p><strong>Mensagem:</strong></p>
+        <p><strong><?php echo MESSAGE_LABEL.':' ?></strong></p>
         <p><?php echo "{CONTACT_MESSAGE}"; ?></p>
         
         <p class="signature"><?php echo SIGNATURE." {SITENAME}" ?></p>
