@@ -27,6 +27,7 @@ define("PASSWORDS_NOT_MATCH", "As senhas não coincidem.");
 define("PASSWORD_INCORRECT", "Senha atual incorreta. Certifique-se de que você inseriu a senha correta.");
 define("PASSWORD_UPDATE", "Sua senha foi alterada com sucesso.");
 define("MESSAGE_SENT", "Sua mensagem foi encaminhada com sucesso.");
+define("CATEGORY_CREATED", "Categoria criada com sucesso.");
 
 // Errors
 define("FATAL_ERROR", "Ops, ocorreu um erro, tente novamente.");
@@ -63,6 +64,8 @@ define("EMAIL_ADDRESS", "Endereço de e-mail");
 define("USER_NAME", "Nome de usuário");
 define("MESSAGE_LABEL" , "Mensagem");
 define("COMPANY_LABEL", "Empresa");
+define("SLUG_URL_LABEL", "Slug url");
+define("STATUS_LABEL", "Status");
 
 // Email Templates
 // WELCOME

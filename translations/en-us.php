@@ -27,6 +27,7 @@ define("PASSWORDS_NOT_MATCH", "Passwords do not match.");
 define("PASSWORD_INCORRECT", "Current password is incorrect. Please make sure you have entered the correct password.");
 define("PASSWORD_UPDATE", "Your password has been changed successfully.");
 define("MESSAGE_SENT", "Your message was forwarded successfully.");
+define("CATEGORY CREATED", "Category created successfully.");
 
 // Errors
 define("FATAL_ERROR", "Oops, an error occurred, please try again.");

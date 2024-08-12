@@ -126,6 +126,48 @@ class UserMiddleware {
         }
     }
 
+    public function contents(Request $request, Response $response) {
+        try {
+            $user = $request->getAttribute("userRequest");
+
+            if(in_array($user->getRole(), self::$noPermissionNeeded)) {
+                return true;
+            }
+
+            if($user->getRole() === "test") {
+                return $response::json([
+                    "message" => TEXT_MESSAGE_ACCOUNT
+                ], 403);
+            }
+
+            $permission = new UserPermissions();
+            $permission->getPermissions($user);
+
+            if(!empty($permission->getId())) {
+                $toContent = $permission->getContent();
+
+                if($toContent["allowed"]) {
+                    return true;
+                }
+
+                return $response::json([
+                    "message" => NOT_ALLOWED
+                ], 403);
+            }
+
+            return $response::json([
+                "message" => NOT_ALLOWED
+            ], 403);
+
+        } catch (Exception $e) {
+            logError($e->getMessage());
+            return $response->json([
+                "message"  => FATAL_ERROR,
+                "redirect" => true
+            ], 500);
+        }
+    }
+
     public function permissionsToUsers(Request $request, Response $response) {
         try {
             $user = $request->getAttribute("userRequest");
