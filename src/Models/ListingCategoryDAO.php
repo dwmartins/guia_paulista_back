@@ -80,4 +80,26 @@ class ListingCategoryDAO extends Database {
             throw new Exception("Error when executing query to update category");
         }
     }
+
+    public static function fetchById(int $id): array {
+        try {
+            $pdo = self::getConnection();
+
+            $stmt = $pdo->prepare(
+                "SELECT *
+                    FROM listing_category
+                    WHERE id = ?"
+            );
+
+            $stmt->execute([$id]);
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $result ?: [];
+            
+        } catch (PDOException $e) {
+            logError($e->getMessage());
+            throw new Exception("Error when executing query to search for category by id");
+        }
+    }
 }

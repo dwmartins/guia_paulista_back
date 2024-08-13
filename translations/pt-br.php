@@ -28,6 +28,8 @@ define("PASSWORD_INCORRECT", "Senha atual incorreta. Certifique-se de que você 
 define("PASSWORD_UPDATE", "Sua senha foi alterada com sucesso.");
 define("MESSAGE_SENT", "Sua mensagem foi encaminhada com sucesso.");
 define("CATEGORY_CREATED", "Categoria criada com sucesso.");
+define("CATEGORY_UPDATED", "Categoria atualizada com sucesso.");
+define("NO_FILES", "Nenhum arquivo encaminhado.");
 
 // Errors
 define("FATAL_ERROR", "Ops, ocorreu um erro, tente novamente.");

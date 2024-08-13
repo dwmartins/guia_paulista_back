@@ -7,9 +7,9 @@ use App\Http\Response;
 class CategoryValidator {
     public static function create(array $data){
         $fields = [
-            NAME_LABEL => $data['name'],
-            SLUG_URL_LABEL => $data['slugUrl'],
-            STATUS_LABEL => $data['status']
+            NAME_LABEL => $data['name'] ?? "",
+            SLUG_URL_LABEL => $data['slugUrl'] ?? "",
+            STATUS_LABEL => $data['status'] ?? ""
         ];
 
         if(empty($data['name'])) {
@@ -21,6 +21,10 @@ class CategoryValidator {
         }
 
         foreach ($fields as $key => $value) {
+            if(empty($value)) {
+                continue;
+            }
+
             if(!TextValidator::text($value)) {
                 Response::json([
                     'message'   => sprintf(FIELD_INVALID_CHARACTERS, $key)

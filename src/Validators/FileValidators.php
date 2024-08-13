@@ -45,6 +45,10 @@ class FileValidators {
         }
     
         $mimeType = explode("/" , $file["type"])[1];
+
+        if($mimeType === 'vnd.microsoft.icon') {
+            $mimeType = "ico";
+        }
     
         return [
             "fileName"  => $file["name"],

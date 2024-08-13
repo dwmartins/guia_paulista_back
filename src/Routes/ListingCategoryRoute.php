@@ -12,3 +12,8 @@ Route::put('/listing/category', 'ListingCategoryController@update', [
     [UserMiddleware::class, 'isAdmin'],
     [UserMiddleware::class, 'contents']
 ]);
+
+Route::post('/listing/category/files/{id}', 'ListingCategoryController@updatePhotoAndIcon', [
+    [UserMiddleware::class, 'isAdmin'],
+    [UserMiddleware::class, 'contents']
+]);

@@ -28,6 +28,8 @@ define("PASSWORD_INCORRECT", "Current password is incorrect. Please make sure yo
 define("PASSWORD_UPDATE", "Your password has been changed successfully.");
 define("MESSAGE_SENT", "Your message was forwarded successfully.");
 define("CATEGORY CREATED", "Category created successfully.");
+define("CATEGORY_UPDATED", "Category updated successfully.");
+define("NO_FILES", "Nenhum arquivo encaminhado.");
 
 // Errors
 define("FATAL_ERROR", "Oops, an error occurred, please try again.");

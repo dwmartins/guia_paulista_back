@@ -117,4 +117,22 @@ class ListingCategory {
             ListingCategoryDAO::update($this);
         }
     }
+
+    public function fetchById(int $id): array {
+        $category = ListingCategoryDAO::fetchById($id);
+
+        if(!empty($category)) {
+            foreach ($category as $key => $value) {
+                if(empty($value)) {
+                    continue;
+                }
+
+                if (property_exists($this, $key)) {
+                    $this->$key = $value;
+                }
+            }
+        }
+
+        return $category;
+    }
 }
