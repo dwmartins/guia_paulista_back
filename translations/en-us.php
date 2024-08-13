@@ -46,6 +46,14 @@ define("INVALID_ZIP_CODE", "The zip code is invalid");
 define("INVALID_FIELD_ERROR", "The field (%s) is invalid");
 define("FIELD_INVALID_CHARACTERS", "The field (%s) contains invalid characters.");
 define("REQUIRED_FIELD", "Field (%s) is required");
+define("INVALID_DISCOUNT", "The Discount field is invalid");
+define("DISCOUNT_ALREADY", "A discount code with that same code already exists.");
+define("STAR_DATE_INVALID", "Start date is less than the current day.");
+define("END_DATE_INVALID", "The end date is less than the current day.");
+define("CODE_CREATED", "Discount code created successfully.");
+define("CODE_UPDATED", "Discount code updated successfully.");
+define("INVALID_CODE", "Invalid discount code.");
+define("VALID_CODE", "Discount code successfully validated.");
 
 // Form Labels
 define("SITE_NAME_LABEL", "Site Name");
@@ -54,7 +62,7 @@ define("PHONE_LABEL", "Phone");
 define("CITY_LABEL", "City");
 define("STATE_LABEL", "State");
 define("ADDRESS_LABEL", "Address");
-define("ZIP_CODE_LABEL", "Zip code");
+define("ZIP_CODE_LABEL", "Zip Code");
 define("INSTAGRAM_LABEL", "Instagram");
 define("FACEBOOK_LABEL", "Facebook");
 define("DESCRIPTION_LABEL", "Description");
@@ -67,6 +75,13 @@ define("EMAIL_ADDRESS", "Email Address");
 define("USER_NAME", "User Name");
 define("MESSAGE_LABEL" , "Message");
 define("COMPANY_LABEL", "Company");
+define("SLUG_URL_LABEL", "Slug url");
+define("STATUS_LABEL", "Status");
+define("CODE_LABEL" , "Code");
+define("DISCOUNT_LABEL", "Discount");
+define("STAR_DATE_LABEL", "Start Date");
+define("END_DATE_LABEL", "End Date");
+define("MODULE_LABEL", "Module");
 
 // Email Templates
 // WELCOME

@@ -46,6 +46,14 @@ define("INVALID_ZIP_CODE", "O Cep é invalido");
 define("INVALID_FIELD_ERROR", "O campo (%s) é inválido");
 define("FIELD_INVALID_CHARACTERS", "O campo (%s) contém caracteres inválidos.");
 define("REQUIRED_FIELD", "O campo (%s) é obrigatório");
+define("INVALID_DISCOUNT", "O campo Desconto é inválido");
+define("DISCOUNT_ALREADY", "Já existe um código de desconto com esse mesmo código.");
+define("STAR_DATE_INVALID", "A data de início é menor que o dia atual.");
+define("END_DATE_INVALID", "A data final é menor que o dia atual.");
+define("CODE_CREATED", "Código de desconto criado com sucesso.");
+define("CODE_UPDATED", "Código de desconto atualizado com sucesso.");
+define("INVALID_CODE", "Código de desconto invalido.");
+define("VALID_CODE", "Código de desconto validado com sucesso.");
 
 // Form Labels
 define("SITE_NAME_LABEL", "Nome do site");
@@ -69,6 +77,11 @@ define("MESSAGE_LABEL" , "Mensagem");
 define("COMPANY_LABEL", "Empresa");
 define("SLUG_URL_LABEL", "Slug url");
 define("STATUS_LABEL", "Status");
+define("CODE_LABEL" , "Código");
+define("DISCOUNT_LABEL", "Desconto");
+define("STAR_DATE_LABEL", "Data inicial");
+define("END_DATE_LABEL", "Data final");
+define("MODULE_LABEL", "Modulo");
 
 // Email Templates
 // WELCOME
