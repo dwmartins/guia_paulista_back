@@ -29,6 +29,7 @@ define("PASSWORD_UPDATE", "Sua senha foi alterada com sucesso.");
 define("MESSAGE_SENT", "Sua mensagem foi encaminhada com sucesso.");
 define("CATEGORY_CREATED", "Categoria criada com sucesso.");
 define("CATEGORY_UPDATED", "Categoria atualizada com sucesso.");
+define("CATEGORY_DELETE", "Categoria deletada com sucesso");
 define("NO_FILES", "Nenhum arquivo encaminhado.");
 
 // Errors

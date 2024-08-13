@@ -102,4 +102,23 @@ class ListingCategoryDAO extends Database {
             throw new Exception("Error when executing query to search for category by id");
         }
     }
+
+    public static function delete(ListingCategory $listingCategory): int {
+        try {
+            $pdo = self::getConnection();
+
+            $stmt = $pdo->prepare(
+                "DELETE FROM listing_category
+                WHERE id = ?"
+            );
+
+            $stmt->execute([$listingCategory->getId()]);
+
+            return $stmt->rowCount();
+            
+        } catch (PDOException $e) {
+            logError($e->getMessage());
+            throw new Exception("Error when executing query to delete for category by id");
+        }
+    }
 }

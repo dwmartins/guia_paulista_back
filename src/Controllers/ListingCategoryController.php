@@ -226,4 +226,31 @@ class ListingCategoryController {
             ], 500);
         }
     }
+
+    public function delete(Request $request, Response $response, $params) {
+        try {
+            $category = new ListingCategory();
+            $category->fetchById($params[0]);
+
+            if(!empty($category->getPhoto())) {
+                UploadFile::removeFile($category->getPhoto(), $this->categoryImagesFolder);
+            }
+
+            if(!empty($category->getIcon())) {
+                UploadFile::removeFile($category->getIcon(), $this->categoryImagesFolder);
+            }
+
+            $category->delete();
+
+            return $response->json([
+                "message" => CATEGORY_DELETE,
+            ]);
+
+        } catch (Exception $e) {
+            logError($e->getMessage());
+            return $response->json([
+                'message' => FATAL_ERROR
+            ], 500);
+        }
+    }
 }

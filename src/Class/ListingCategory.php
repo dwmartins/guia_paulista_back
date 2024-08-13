@@ -118,6 +118,10 @@ class ListingCategory {
         }
     }
 
+    public function delete() {
+        return ListingCategoryDAO::delete($this);
+    }
+
     public function fetchById(int $id): array {
         $category = ListingCategoryDAO::fetchById($id);
 
