@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Class\DiscountCode;
+use App\Class\User;
 use App\Http\Request;
 use App\Http\Response;
 use App\Models\DiscountCodeDAO;
@@ -130,17 +131,17 @@ class DiscountCodeController {
 
             $discountCode = new DiscountCode(DiscountCodeDAO::fetchByCode($data['code']));
             
-            if(empty($discountCode->getId()) || 
-                new DateTime($discountCode->getStartDate()) < new DateTime() || 
-                new DateTime($discountCode->getEndDate()) < new DateTime()) {
-
+            if(empty($discountCode->getId()) || !$this->codeIsValid($discountCode, $data)) {
                 return $response->json([
                     'message' => INVALID_CODE
                 ], 400);
             }
 
+            $discountCode->useDiscountCode();
+
             return $response->json([
-                'message' => VALID_CODE
+                "message" => VALID_CODE,
+                "discountCodeData" => $discountCode->toArray()
             ]);
 
         } catch (Exception $e) {
@@ -149,5 +150,43 @@ class DiscountCodeController {
                 'message' => FATAL_ERROR
             ], 500);
         }
+    }
+
+    public function codeIsValid(DiscountCode $discountCode, array $data) {
+        $currentDate = new DateTime();
+        $startDate = new DateTime($discountCode->getStartDate());
+        $endDate = new DateTime($discountCode->getEndDate());
+
+        if($currentDate <= $startDate) {
+            return false;
+        }
+
+        if($currentDate >= $endDate) {
+            return false;
+        }
+
+        if($discountCode->getActive() == "N") {
+            return false;
+        }
+
+        if($discountCode->getCurrentUses() >= $discountCode->getMaxUses()) {
+            return false;
+        }
+
+        if(!empty($discountCode->getSponsor())) {
+            $sponsor = new User();
+            $sponsor->fetchById($discountCode->getSponsor());
+
+            $userRequest = new User();
+            $userRequest->fetchById($data['userId']);
+
+            return $sponsor->getId() === $userRequest->getId();
+        }
+
+        if(!empty($discountCode->getModule())) {
+            return $discountCode->getModule() === strtolower($data["module"]);
+        }
+
+        return true;
     }
 }

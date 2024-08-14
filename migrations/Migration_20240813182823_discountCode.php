@@ -26,6 +26,8 @@ class Migration_20240813182823_discountCode extends Database{
                 endDate DATETIME NOT NULL,
                 active ENUM('Y', 'N'),
                 module VARCHAR(50),
+                maxUses INT NOT NULL,
+                currentUses INT NOT NULL,
                 createdAt DATETIME,
                 updatedAt DATETIME,
                 FOREIGN KEY (sponsor) REFERENCES users(id)

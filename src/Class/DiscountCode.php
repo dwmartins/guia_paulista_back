@@ -13,6 +13,8 @@ class DiscountCode {
     private string $endDate = "";
     private string $active = "N";
     private string $module = "";
+    private int $maxUses = 0;
+    private int $currentUses = 0;
     private string $createdAt = "";
     private string $updatedAt = "";
 
@@ -24,6 +26,11 @@ class DiscountCode {
                 }
 
                 if(property_exists($this, $key)) {
+                    if($key === "module") {
+                        $this->module = strtolower($value);
+                        continue;
+                    }
+
                     $this->$key = $value;
                 }
             }
@@ -32,16 +39,18 @@ class DiscountCode {
 
     public function toArray(): array {
         return [
-            "id"        => $this->id,
-            "code"      => $this->code,
-            "discount"  => $this->discount,
-            "sponsor"   => $this->sponsor,
-            "startDate" => $this->startDate,
-            "endDate"   => $this->endDate,
-            "active"    => $this->active,
-            "module"    => $this->module,
-            "createdAt" => $this->createdAt,
-            "updatedAt" => $this->updatedAt
+            "id"            => $this->id,
+            "code"          => $this->code,
+            "discount"      => $this->discount,
+            "sponsor"       => $this->sponsor,
+            "startDate"     => $this->startDate,
+            "endDate"       => $this->endDate,
+            "active"        => $this->active,
+            "module"        => $this->module,
+            "maxUses"       => $this->maxUses,
+            "currentUses"   => $this->currentUses,
+            "createdAt"     => $this->createdAt,
+            "updatedAt"     => $this->updatedAt
         ];
     }
 
@@ -106,7 +115,23 @@ class DiscountCode {
     }
 
     public function setModule(string $module): void {
-        $this->module = $module;
+        $this->module = strtolower($module);
+    }
+
+    public function getMaxUses(): int {
+        return $this->maxUses;
+    }
+
+    public function setMaxUses(int $maxUses): void {
+        $this->maxUses = $maxUses;
+    }
+
+    public function getCurrentUses(): int {
+        return $this->currentUses;
+    }
+
+    public function setCurrentUses(int $currentUses): void {
+        $this->currentUses = $currentUses;
     }
 
     public function getCreatedAt(): string {
@@ -123,6 +148,16 @@ class DiscountCode {
 
     public function setUpdatedAt(string $updatedAt): void {
         $this->updatedAt = $updatedAt;
+    }
+
+    public function useDiscountCode(): void {
+        $this->currentUses++;
+
+        if($this->currentUses === $this->maxUses) {
+            $this->setActive("N");
+        }
+
+        $this->save();
     }
 
     public function save(): int {
