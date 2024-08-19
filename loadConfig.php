@@ -13,11 +13,13 @@ loadEnv($envFile);
 // Configure CORS permissions
 handleCors();
 
-// Set the default language
-loadTranslations();
+if(!isCli()) {
+    // Set the default language
+    loadTranslations();
 
-// Sets the default time zone
-loadTimeZone();
+    // Sets the default time zone
+    loadTimeZone();
+}
 
 function isFaviconRequest() {
     return isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] === '/favicon.ico';

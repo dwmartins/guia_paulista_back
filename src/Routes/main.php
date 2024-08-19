@@ -1,6 +1,6 @@
 <?php
 
-$routesDirectory = scandir(__DIR__."../");
+$routesDirectory = scandir(__DIR__);
 $routes = array_diff($routesDirectory, ['.', '..', '.gitignore']);
 
 foreach ($routes as $route) {
@@ -8,5 +8,5 @@ foreach ($routes as $route) {
         continue;
     }
 
-    include __DIR__."../$route";
+    include __DIR__."/$route";
 }
