@@ -63,12 +63,14 @@ function loadEnv($envFile) {
 }
 
 function handleCors() {
-    $allowed_origin = $_ENV['ALLOWED_ORIGIN'] ?? '';
+    $allowed_origins = explode(',', $_ENV['ALLOWED_ORIGINS'] ?? '');
+    $allowed_origins = array_map('trim', $allowed_origins);
+
     $requestOrigin = $_SERVER['HTTP_ORIGIN'] ?? '';
 
     if (!isCli()) {
-        if (DEV_MODE || $requestOrigin === $allowed_origin) {
-            setCorsHeaders($allowed_origin);
+        if (DEV_MODE || in_array($requestOrigin, $allowed_origins, true)) {
+            setCorsHeaders($requestOrigin);
         } else {
             Response::json([
                 "message" => "You are not authorized to access this API"
