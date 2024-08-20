@@ -49,6 +49,10 @@ class Migration_20240727211124_table_settings extends Database{
             [
                 "name" => "compressImage",
                 "value" => "on"
+            ],
+            [
+                "name" => "maintenance",
+                "value" => "off"
             ]
         ];
 
