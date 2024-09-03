@@ -9,6 +9,7 @@ class FileCache {
     public function __construct($cacheDir = 'cache', $defaultExpiration = 604800) {
         $rootPath = realpath(__DIR__ . '/../../');
         $this->cacheDir = $rootPath . DIRECTORY_SEPARATOR . $cacheDir;
+        $this->defaultExpiration = $defaultExpiration;
 
         if(!is_dir($this->cacheDir)) {
             mkdir($this->cacheDir, 0755, true);
@@ -23,7 +24,8 @@ class FileCache {
         $cacheFile = $this->getCacheFilePath($cacheKey);
 
         if (file_exists($cacheFile) && (time() - filemtime($cacheFile)) < $this->defaultExpiration) {
-            return file_get_contents($cacheFile);
+            $cache = file_get_contents($cacheFile);
+            return json_decode($cache, true);
         }
 
         return false;
@@ -31,7 +33,7 @@ class FileCache {
 
     public function set($cacheKey, $data) {
         $cacheFile = $this->getCacheFilePath($cacheKey);
-        file_put_contents($cacheFile, $data);
+        file_put_contents($cacheFile, json_encode($data));
     }
 
     public function delete($cacheKey) {

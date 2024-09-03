@@ -6,8 +6,22 @@ use App\Models\SettingsDAO;
 
 function getSetting(string $name) {
     try {
-        $setting = SettingsDAO::fetchByName($name);
-        return $setting['value'] ?: [];
+        $cache = new FileCache();
+        $cacheData = $cache->get('settings');
+
+        if($cacheData) {
+            foreach ($cacheData as $setting) {
+                if($setting['name'] === $name) {
+                    return $setting['value'] ?? null;
+                }
+            }
+
+        } else {
+            $setting = SettingsDAO::fetchByName($name);
+            $cache->set('settings', SettingsDAO::fetch());
+            return $setting['value'] ?? null;
+        }
+
     } catch (Exception $e) {
         logError($e);
         throw new Exception("Error fetching setting");
@@ -21,10 +35,10 @@ function getAllSettings() {
         $data = [];
 
         if($cacheData) {
-            $data = json_decode($cacheData, true);
+            $data = $cacheData;
         } else {
             $data = SettingsDAO::fetch();
-            $cache->set('settings', json_encode($data));
+            $cache->set('settings', $data);
         }
 
         return $data;
@@ -35,8 +49,6 @@ function getAllSettings() {
 }
 
 function updateSetting($name, $newValue) {
-    $settingsToUpdateFile = ["language", "emailSending", "timezone"];
-
     try {
         $setting = new Settings();
 
@@ -47,42 +59,11 @@ function updateSetting($name, $newValue) {
 
         $setting->update($values);
 
-        if(in_array($name, $settingsToUpdateFile)) {
-            updateSettingFile($name, $newValue);
-        }
+        $cache = new FileCache();
+        $cache->set('settings', SettingsDAO::fetch());
 
     } catch (Exception $e) {
         logError($e);
         throw new Exception("Error updating settings");
     }
-}
-
-function updateSettingFile($field, $value) {
-    $rootPath = realpath(__DIR__ . '/../../');
-    $fileSettings = $rootPath . '/settings.json';
-
-    if(!file_exists($fileSettings)) {
-        file_put_contents($fileSettings, json_encode([$field => $value], JSON_PRETTY_PRINT));
-    } else {
-        $data = json_decode(file_get_contents($fileSettings), true);
-        $data[$field] = $value;
-        file_put_contents($fileSettings, json_encode($data, JSON_PRETTY_PRINT));
-    }
-}
-
-function loadFileSettings($field = null) {
-    $rootPath = realpath(__DIR__ . '/../../');
-    $fileSettings = $rootPath . '/settings.json';
-
-    if (!file_exists($fileSettings)) {
-        throw new Exception("The settings file was not found.");
-    }
-
-    $settings = json_decode(file_get_contents($fileSettings), true);
-
-    if(!empty($field)) {
-        return $settings[$field];
-    }
-
-    return $settings;
 }
