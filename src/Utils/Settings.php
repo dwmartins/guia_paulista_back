@@ -1,5 +1,6 @@
 <?php
 
+use App\class\FileCache;
 use App\Class\Settings;
 use App\Models\SettingsDAO;
 
@@ -15,7 +16,18 @@ function getSetting(string $name) {
 
 function getAllSettings() {
     try {
-        return SettingsDAO::fetch();
+        $cache = new FileCache();
+        $cacheData = $cache->get('settings');
+        $data = [];
+
+        if($cacheData) {
+            $data = json_decode($cacheData, true);
+        } else {
+            $data = SettingsDAO::fetch();
+            $cache->set('settings', json_encode($data));
+        }
+
+        return $data;
     } catch (Exception $e) {
         logError($e);
         throw new Exception("Error fetching settings");

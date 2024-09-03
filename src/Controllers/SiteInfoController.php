@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\class\FileCache;
 use App\Class\SiteInfo;
 use App\Http\Request;
 use App\Http\Response;
@@ -116,9 +117,19 @@ class SiteInfoController {
     public function fetch(Request $request, Response $response) {
         try {
             $siteInfo = new SiteInfo();
+            $cache = new FileCache();
+            $cacheData = $cache->get('site_info');
+            $data = [];
+
+            if($cacheData) {
+                $data = json_decode($cacheData, true);
+            } else {
+                $data = $siteInfo->fetch();
+                $cache->set('site_info', json_encode($data));
+            }
             
             return $response->json([
-                "siteInfo" => $siteInfo->fetch(),
+                "siteInfo" => $data,
                 "settings" => getAllSettings()
             ]);
 
