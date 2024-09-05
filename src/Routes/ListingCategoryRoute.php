@@ -22,3 +22,5 @@ Route::post('/listing/category/files/{id}', 'ListingCategoryController@updatePho
     [UserMiddleware::class, 'isAdmin'],
     [UserMiddleware::class, 'contents']
 ]);
+
+Route::get('/listing/category', 'ListingCategoryController@fetch');

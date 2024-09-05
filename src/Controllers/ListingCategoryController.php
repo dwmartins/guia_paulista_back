@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Class\ListingCategory;
 use App\Http\Request;
 use App\Http\Response;
+use App\Models\ListingCategoryDAO;
 use App\Utils\UploadFile;
 use App\Validators\CategoryValidator;
 use App\Validators\FileValidators;
@@ -76,6 +77,17 @@ class ListingCategoryController {
             ], 201);
 
         } catch (Exception $e) {
+            logError($e->getMessage());
+            return $response->json([
+                'message' => FATAL_ERROR
+            ], 500);
+        }
+    }
+
+    public function fetch(Request $request, Response $response) {
+        try {
+            return $response->json(ListingCategoryDAO::fetch());
+        } catch (\Exception $e) {
             logError($e->getMessage());
             return $response->json([
                 'message' => FATAL_ERROR

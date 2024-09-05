@@ -53,6 +53,10 @@ class Migration_20240727211124_table_settings extends Database{
             [
                 "name" => "maintenance",
                 "value" => "off"
+            ],
+            [
+                "name" => "timeFormat",
+                "value" => "HH:mm:ss"
             ]
         ];
 

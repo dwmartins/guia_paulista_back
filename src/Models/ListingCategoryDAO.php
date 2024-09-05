@@ -103,6 +103,24 @@ class ListingCategoryDAO extends Database {
         }
     }
 
+    public static function fetch(): array {
+        try {
+            $pdo = self::getConnection();
+
+            $stmt = $pdo->prepare(
+                "SELECT * FROM listing_category"
+            );
+
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $result ?: [];
+        } catch (\Throwable $e) {
+            logError($e->getMessage());
+            throw new Exception("Error when executing query to search for category");
+        }
+    }
+
     public static function delete(ListingCategory $listingCategory): int {
         try {
             $pdo = self::getConnection();

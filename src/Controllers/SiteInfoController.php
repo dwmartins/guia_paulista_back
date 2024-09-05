@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\class\FileCache;
+use App\Class\FileCache;
 use App\Class\SiteInfo;
 use App\Http\Request;
 use App\Http\Response;
