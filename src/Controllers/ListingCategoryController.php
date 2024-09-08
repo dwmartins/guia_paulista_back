@@ -19,7 +19,6 @@ class ListingCategoryController {
             $data = $request->body();
             $files = $request->files();
             $iconData = "";
-            $photoData = "";
 
             $category = new ListingCategory($data);
 
@@ -27,7 +26,7 @@ class ListingCategoryController {
                 return;
             }
 
-            if(!empty($files['icon']) || !empty($files['photo'])) {
+            if(!empty($files['icon'])) {
                 $errors = "";
 
                 if(!empty($files['icon'])) {
@@ -35,14 +34,6 @@ class ListingCategoryController {
 
                     if(isset($iconData['invalid'])) {
                         $errors = $iconData['invalid'];
-                    }
-                }
-
-                if(!empty($files['photo'])) {
-                    $photoData = FileValidators::validImage($files['photo']);
-
-                    if(isset($photoData['invalid'])) {
-                        $errors = $photoData['invalid'];
                     }
                 }
 
@@ -55,17 +46,11 @@ class ListingCategoryController {
 
             $category->save();
 
-            if(!empty($iconData) || !empty($photoData)) {
+            if(!empty($iconData)) {
                 if(!empty($iconData)) {
                     $iconName = $category->getId() . "_icon." . $iconData['mimeType'];
                     UploadFile::uploadFile($files['icon'], $this->categoryImagesFolder, $iconName);
                     $category->setIcon($iconName);
-                }
-
-                if(!empty($photoData)) {
-                    $photoName = $category->getId() . "_photo." . $photoData['mimeType'];
-                    UploadFile::uploadFile($files['photo'], $this->categoryImagesFolder, $photoName);
-                    $category->setPhoto($photoName);
                 }
 
                 $category->save();
@@ -108,7 +93,7 @@ class ListingCategoryController {
                 return;
             }
 
-            if(!empty($files['icon']) || !empty($files['photo'])) {
+            if(!empty($files['icon'])) {
                 $errors = "";
 
                 if(!empty($files['icon'])) {
@@ -119,14 +104,6 @@ class ListingCategoryController {
                     }
                 }
 
-                if(!empty($files['photo'])) {
-                    $photoData = FileValidators::validImage($files['photo']);
-
-                    if(isset($photoData['invalid'])) {
-                        $errors = $photoData['invalid'];
-                    }
-                }
-
                 if(!empty($errors)) {
                     return $response->json([
                         'message' => $errors
@@ -134,17 +111,11 @@ class ListingCategoryController {
                 }
             }
 
-            if(!empty($iconData) || !empty($photoData)) {
+            if(!empty($iconData)) {
                 if(!empty($iconData)) {
                     $iconName = $category->getId() . "_icon." . $iconData['mimeType'];
                     UploadFile::uploadFile($files['icon'], $this->categoryImagesFolder, $iconName);
                     $category->setIcon($iconName);
-                }
-
-                if(!empty($photoData)) {
-                    $photoName = $category->getId() . "_photo." . $photoData['mimeType'];
-                    UploadFile::uploadFile($files['photo'], $this->categoryImagesFolder, $photoName);
-                    $category->setPhoto($photoName);
                 }
 
                 $category->save();
@@ -165,7 +136,7 @@ class ListingCategoryController {
         }
     }
 
-    public function updatePhotoAndIcon(Request $request, Response $response, $params) {
+    public function updateIcon(Request $request, Response $response, $params) {
         try {
             $files = $request->files();
             $iconData = "";
@@ -179,14 +150,6 @@ class ListingCategoryController {
 
                     if(isset($iconData['invalid'])) {
                         $errors = $iconData['invalid'];
-                    }
-                }
-
-                if(!empty($files['photo'])) {
-                    $photoData = FileValidators::validImage($files['photo']);
-
-                    if(isset($photoData['invalid'])) {
-                        $errors = $photoData['invalid'];
                     }
                 }
 
@@ -208,16 +171,6 @@ class ListingCategoryController {
 
                     UploadFile::uploadFile($files['icon'], $this->categoryImagesFolder, $iconName);
                     $category->setIcon($iconName);
-                }
-
-                if(!empty($photoData)) {
-                    if(!empty($category->getPhoto())) {
-                        UploadFile::removeFile($category->getPhoto(), $this->categoryImagesFolder);
-                    }
-
-                    $photoName = $category->getId() . "_photo." . $photoData['mimeType'];
-                    UploadFile::uploadFile($files['photo'], $this->categoryImagesFolder, $photoName);
-                    $category->setPhoto($photoName);
                 }
 
                 $category->save();
@@ -243,10 +196,6 @@ class ListingCategoryController {
         try {
             $category = new ListingCategory();
             $category->fetchById($params[0]);
-
-            if(!empty($category->getPhoto())) {
-                UploadFile::removeFile($category->getPhoto(), $this->categoryImagesFolder);
-            }
 
             if(!empty($category->getIcon())) {
                 UploadFile::removeFile($category->getIcon(), $this->categoryImagesFolder);

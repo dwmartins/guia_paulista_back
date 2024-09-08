@@ -7,7 +7,6 @@ use App\Models\ListingCategoryDAO;
 class ListingCategory {
     private int $id = 0;
     private string $name = "";
-    private string $photo = "";
     private string $icon = "";
     private string $slugUrl = "";
     private string $status = "Y";
@@ -22,7 +21,7 @@ class ListingCategory {
                         continue;
                     }
 
-                    if($key == "photo" || $key == "icon") {
+                    if($key == "icon") {
                         continue;
                     }
 
@@ -36,7 +35,6 @@ class ListingCategory {
         return [
             "id"        => $this->id,
             "name"      => $this->name,
-            "photo"     => $this->photo,
             "icon"      => $this->icon,
             "slugUrl"   => $this->slugUrl,
             "status"    => $this->status,
@@ -60,14 +58,6 @@ class ListingCategory {
 
     public function setName(string $name): void {
         $this->name = $name;
-    }
-
-    public function getPhoto(): string {
-        return $this->photo;
-    }
-
-    public function setPhoto(string $photo): void {
-        $this->photo = $photo;
     }
 
     public function getIcon(): string {
