@@ -22,7 +22,7 @@ class Migration_20240812184811_table_listing_category extends Database{
                 name VARCHAR(255),
                 icon VARCHAR(255),
                 slugUrl VARCHAR(255),
-                keywords JSON,
+                keywords LONGTEXT,
                 metaDescription LONGTEXT,
                 status ENUM('Y', 'N'),
                 createdAt DATETIME,

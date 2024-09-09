@@ -108,16 +108,35 @@ class ListingCategoryDAO extends Database {
             $pdo = self::getConnection();
 
             $stmt = $pdo->prepare(
-                "SELECT * FROM listing_category"
+                "SELECT * FROM listing_category ORDER BY name ASC"
             );
 
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             return $result ?: [];
-        } catch (\Throwable $e) {
+        } catch (\PDOException $e) {
             logError($e->getMessage());
             throw new Exception("Error when executing query to search for category");
+        }
+    }
+
+    public static function fetchBySlugUrl($slugUrl): array {
+        try {
+            $pdo = self::getConnection();
+
+            $stmt = $pdo->prepare(
+                "SELECT * FROM listing_category WHERE slugUrl = ?"
+            );
+
+            $stmt->execute([$slugUrl]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $result ?: [];
+
+        } catch (\PDOException $e) {
+            logError($e->getMessage());
+            throw new Exception("Error when executing query to search for category by slugUrl");
         }
     }
 

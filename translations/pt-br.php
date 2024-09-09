@@ -54,6 +54,7 @@ define("CODE_CREATED", "Código de desconto criado com sucesso.");
 define("CODE_UPDATED", "Código de desconto atualizado com sucesso.");
 define("INVALID_CODE", "Código de desconto invalido.");
 define("VALID_CODE", "Código de desconto validado com sucesso.");
+define("SLUG_URL_IS_ALREADY", "Está Slug URL já está em uso");
 
 // Form Labels
 define("SITE_NAME_LABEL", "Nome do site");

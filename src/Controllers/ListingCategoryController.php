@@ -22,6 +22,12 @@ class ListingCategoryController {
 
             $category = new ListingCategory($data);
 
+            if(ListingCategoryDAO::fetchBySlugUrl($category->getSlugUrl())) {
+                return $response->json([
+                    'message'   => SLUG_URL_IS_ALREADY
+                ], 409);
+            }
+
             if(!CategoryValidator::create($data)) {
                 return;
             }

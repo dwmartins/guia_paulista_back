@@ -9,6 +9,8 @@ class ListingCategory {
     private string $name = "";
     private string $icon = "";
     private string $slugUrl = "";
+    private string $keywords = "";
+    private string $metaDescription = "";
     private string $status = "Y";
     private string $createdAt = "";
     private string $updatedAt = "";
@@ -33,13 +35,15 @@ class ListingCategory {
 
     public function toArray(): array {
         return [
-            "id"        => $this->id,
-            "name"      => $this->name,
-            "icon"      => $this->icon,
-            "slugUrl"   => $this->slugUrl,
-            "status"    => $this->status,
-            "createdAt" => $this->createdAt,
-            "updatedAt" => $this->updatedAt,
+            "id"              => $this->id,
+            "name"            => $this->name,
+            "icon"            => $this->icon,
+            "slugUrl"         => $this->slugUrl,
+            "keywords"        => $this->keywords,
+            "metaDescription" => $this->metaDescription,
+            "status"          => $this->status,
+            "createdAt"       => $this->createdAt,
+            "updatedAt"       => $this->updatedAt,
 
         ];
     }
@@ -74,6 +78,22 @@ class ListingCategory {
 
     public function setSlugUrl(string $slugUrl): void {
         $this->slugUrl = $slugUrl;
+    }
+
+    public function getKeywords(): string {
+        return $this->keywords;
+    }
+
+    public function setKeywords($keywords): void {
+        $this->keywords = $keywords;
+    }
+
+    public function getMetaDescription() {
+        return $this->metaDescription;
+    }
+
+    public function setMetaDescription($metaDescription): void {
+        $this->metaDescription = $metaDescription;
     }
 
     public function getStatus(): string {

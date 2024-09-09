@@ -54,6 +54,7 @@ define("CODE_CREATED", "Discount code created successfully.");
 define("CODE_UPDATED", "Discount code updated successfully.");
 define("INVALID_CODE", "Invalid discount code.");
 define("VALID_CODE", "Discount code successfully validated.");
+define("SLUG_URL_IS_ALREADY", "This URL Slug is already in use");
 
 // Form Labels
 define("SITE_NAME_LABEL", "Site Name");
