@@ -23,9 +23,4 @@ Route::post('/listing/category/delete-multiples', 'ListingCategoryController@del
     [UserMiddleware::class, 'contents']
 ]);
 
-Route::post('/listing/category/files/{id}', 'ListingCategoryController@updatePhotoAndIcon', [
-    [UserMiddleware::class, 'isAdmin'],
-    [UserMiddleware::class, 'contents']
-]);
-
 Route::get('/listing/category', 'ListingCategoryController@fetch');
