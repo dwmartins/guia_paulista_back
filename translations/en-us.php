@@ -30,6 +30,7 @@ define("MESSAGE_SENT", "Your message was forwarded successfully.");
 define("CATEGORY CREATED", "Category created successfully.");
 define("CATEGORY_UPDATED", "Category updated successfully.");
 define("CATEGORY DELETE", "Category deleted successfully");
+define("CATEGORIES_DELETED", "Categories deleted successfully.");
 define("NO_FILES", "Nenhum arquivo encaminhado.");
 
 // Errors

@@ -220,4 +220,31 @@ class ListingCategoryController {
             ], 500);
         }
     }
+
+    public function deleteMultiples(Request $request, Response $response) {
+        try {
+            $data = $request->body();
+
+            foreach ($data as $value) {
+                $category = new ListingCategory();
+                $category->fetchById($value);
+
+                if(!empty($category->getIcon())) {
+                    UploadFile::removeFile($category->getIcon(), $this->categoryImagesFolder);
+                }
+
+                $category->delete();
+            }
+
+            return $response->json([
+                "message" => CATEGORIES_DELETED,
+            ]);
+
+        } catch (Exception $e) {
+            logError($e->getMessage());
+            return $response->json([
+                'message' => FATAL_ERROR
+            ], 500);
+        }
+    }
 }
