@@ -91,23 +91,22 @@ class ListingCategoryController {
             $data = $request->body();
             $files = $request->files();
             $iconData = "";
-            $photoData = "";
 
-            $category = new ListingCategory($data);
+            $category = new ListingCategory();
+            $category->fetchById($data['id']);
+            $category->update($data);
 
             if(!CategoryValidator::create($data)) {
                 return;
             }
 
-            if(!empty($files['icon'])) {
+            if(isset($files['icon']) && !empty($files['icon'])) {
                 $errors = "";
 
-                if(!empty($files['icon'])) {
-                    $iconData = FileValidators::validIcon($files['icon']);
+                $iconData = FileValidators::validIcon($files['icon']);
 
-                    if(isset($iconData['invalid'])) {
-                        $errors = $iconData['invalid'];
-                    }
+                if(isset($iconData['invalid'])) {
+                    $errors = $iconData['invalid'];
                 }
 
                 if(!empty($errors)) {
@@ -118,13 +117,10 @@ class ListingCategoryController {
             }
 
             if(!empty($iconData)) {
-                if(!empty($iconData)) {
-                    $iconName = $category->getId() . "_icon." . $iconData['mimeType'];
-                    UploadFile::uploadFile($files['icon'], $this->categoryImagesFolder, $iconName);
-                    $category->setIcon($iconName);
-                }
-
-                $category->save();
+                $iconName = $category->getId() . "_icon." . $iconData['mimeType'];
+                UploadFile::removeFile($category->getIcon(), $this->categoryImagesFolder);
+                UploadFile::uploadFile($files['icon'], $this->categoryImagesFolder, $iconName);
+                $category->setIcon($iconName);
             }
 
             $category->save();

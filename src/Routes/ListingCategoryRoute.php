@@ -8,7 +8,7 @@ Route::post('/listing/category', 'ListingCategoryController@create', [
     [UserMiddleware::class, 'contents']
 ]);
 
-Route::put('/listing/category', 'ListingCategoryController@update', [
+Route::post('/listing/category/update', 'ListingCategoryController@update', [
     [UserMiddleware::class, 'isAdmin'],
     [UserMiddleware::class, 'contents']
 ]);

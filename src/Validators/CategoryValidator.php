@@ -9,7 +9,6 @@ class CategoryValidator {
         $fields = [
             NAME_LABEL => $data['name'] ?? "",
             SLUG_URL_LABEL => $data['slugUrl'] ?? "",
-            STATUS_LABEL => $data['status'] ?? ""
         ];
 
         if(empty($data['name'])) {

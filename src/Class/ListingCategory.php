@@ -23,10 +23,6 @@ class ListingCategory {
                         continue;
                     }
 
-                    if($key == "icon") {
-                        continue;
-                    }
-
                     $this->$key = $value;
                 }
             }
@@ -118,6 +114,14 @@ class ListingCategory {
 
     public function setUpdatedAt(string $updatedAt): void {
         $this->updatedAt = $updatedAt;
+    }
+
+    public function update(array $category): void {
+        foreach ($category as $key => $value) {
+            if(property_exists($this, $key)) {
+                $this->$key = $value;
+            }
+        }
     }
 
     public function save(): void {
