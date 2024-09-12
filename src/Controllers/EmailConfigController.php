@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Class\EmailConfig;
 use App\Http\Request;
 use App\Http\Response;
-use App\Validators\EmailConfigValidator;
+use App\Validators\EmailSettingsValidator;
 use Exception;
 
 class EmailConfigController {
@@ -13,8 +13,12 @@ class EmailConfigController {
         try {
             $data = $request->body();
 
-            if(!EmailConfigValidator::create($data)) {
-                return false;
+            $fieldsValid = EmailSettingsValidator::create($data);
+            
+            if(!$fieldsValid['isValid']) {
+                return $response->json([
+                    "message" => $fieldsValid['message']
+                ], 400);
             }
 
             $emailConfig = new EmailConfig($data);

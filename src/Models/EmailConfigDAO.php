@@ -58,6 +58,10 @@ class EmailConfigDAO extends Database{
             $ignoredColumns = ["id", "createdAt"];
 
             foreach ($emailConfigArray as $key => $value) {
+                if(empty($value)) {
+                    continue;
+                }
+
                 if (in_array($key, $ignoredColumns)) {
                     continue;
                 }
