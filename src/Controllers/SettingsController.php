@@ -24,4 +24,15 @@ class SettingsController {
             ], 500);
         }
     }
+
+    public function getAll(Request $request, Response $response) {
+        try {
+            $response->json(getAllSettings());
+        } catch (Exception $e) {
+            logError($e->getMessage());
+            return $response->json([
+                "message" => FATAL_ERROR
+            ], 500);
+        }
+    }
 }

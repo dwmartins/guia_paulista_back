@@ -7,3 +7,5 @@ Route::post('/settings', 'SettingsController@update', [
     [UserMiddleware::class, 'isAuth'],
     [UserMiddleware::class, 'settings']
 ]);
+
+Route::get('/settings', 'SettingsController@getAll');
