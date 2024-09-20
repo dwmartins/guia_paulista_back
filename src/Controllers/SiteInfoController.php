@@ -125,7 +125,7 @@ class SiteInfoController {
                 $data = $cacheData;
             } else {
                 $data = $siteInfo->fetch();
-                $cache->set('site_info', json_encode($data));
+                $cache->set('site_info', $data);
             }
             
             return $response->json([
