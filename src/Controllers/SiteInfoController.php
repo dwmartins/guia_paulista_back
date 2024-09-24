@@ -51,10 +51,10 @@ class SiteInfoController {
             $requestFiles = $request->files();
 
             $files = [
-                "logoImage" => !empty($requestFiles["logoImage"]) ? $requestFiles["logoImage"] : null,
-                "coverImage" => !empty($requestFiles["coverImage"]) ? $requestFiles["coverImage"] : null,
-                "ico" => !empty($requestFiles["ico"]) ? $requestFiles["ico"] : null,
-                "defaultImage" => !empty($requestFiles["defaultImage"]) ? $requestFiles["defaultImage"] : null
+                "logo" => !empty($requestFiles["logo"]) ? $requestFiles["logo"] : null,
+                "cover" => !empty($requestFiles["cover"]) ? $requestFiles["cover"] : null,
+                "icon" => !empty($requestFiles["icon"]) ? $requestFiles["icon"] : null,
+                "default" => !empty($requestFiles["default"]) ? $requestFiles["default"] : null
             ];
 
             $siteInfo = new SiteInfo();
@@ -65,7 +65,7 @@ class SiteInfoController {
                     continue;
                 }
 
-                if($key == "ico") {
+                if($key == "icon") {
                     $fileData = FileValidators::validIcon($file);
                 } else {
                     $fileData = FileValidators::validImage($file);
@@ -79,27 +79,47 @@ class SiteInfoController {
                 }
 
                 $fileName = $key . "." . $fileData["mimeType"];
-                UploadFile::uploadFile($file, $this->siteInfoImagesFolder, $fileName);
 
                 switch ($key) {
-                    case "logoImage":
+                    case "logo":
+                        if(!empty($siteInfo->getLogoImage())) {
+                            UploadFile::removeFile($siteInfo->getLogoImage(), $this->siteInfoImagesFolder);
+                        }
+
                         $siteInfo->setLogoImage($fileName);
                         break;
-                    case "coverImage":
+                    case "cover":
+                        if(!empty($siteInfo->getCoverImage())) {
+                            UploadFile::removeFile($siteInfo->getCoverImage(), $this->siteInfoImagesFolder);
+                        }
+
                         $siteInfo->setCoverImage($fileName);
                         break;
-                    case "defaultImage":
+                    case "default":
+                        if(!empty($siteInfo->getDefaultImage())) {
+                            UploadFile::removeFile($siteInfo->getDefaultImage(), $this->siteInfoImagesFolder);
+                        }
+
                         $siteInfo->setDefaultImage($fileName);
                         break;
-                    case "ico":
+                    case "icon":
+                        if(!empty($siteInfo->getIco())) {
+                            UploadFile::removeFile($siteInfo->getIco(), $this->siteInfoImagesFolder);
+                        }
+
                         $siteInfo->setIco($fileName);
                         break;
                     default:
                         break;
                 }
+
+                UploadFile::uploadFile($file, $this->siteInfoImagesFolder, $fileName);
             }
 
             $siteInfo->save();
+
+            $cache = new FileCache();
+            $cache->set('site_info', $siteInfo->toArray());
 
             return $response->json([
                 "message" => UPDATED_IMAGES,
