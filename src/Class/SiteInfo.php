@@ -211,10 +211,6 @@ class SiteInfo {
 
     public function update(array $siteInfo): void {
         foreach ($siteInfo as $key => $value) {
-            if(empty($value)) {
-                continue;
-            }
-
             if (property_exists($this, $key)) {
                 $this->$key = $value;
             }

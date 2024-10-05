@@ -67,6 +67,7 @@ define("ADDRESS_LABEL", "Address");
 define("ZIP_CODE_LABEL", "Zip Code");
 define("INSTAGRAM_LABEL", "Instagram");
 define("FACEBOOK_LABEL", "Facebook");
+define("TWITTER_LABEL", "Twitter");
 define("DESCRIPTION_LABEL", "Description");
 define("KEYWORDS_LABEL", "Keywords");
 define("NAME_LABEL", "First Name");

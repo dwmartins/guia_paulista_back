@@ -19,12 +19,15 @@ class SiteInfoController {
         try {
             $requestData = $request->body();
 
-            $siteInfo = new SiteInfo($requestData);
+            $fieldsValid = SiteInfoValidator::create($requestData);
 
-            if(!SiteInfoValidator::create($siteInfo)) {
-                return;
+            if(!$fieldsValid['isValid']) {
+                return $response->json([
+                    "message" => $fieldsValid['message']
+                ], 400);
             }
-
+                
+            $siteInfo = new SiteInfo();
             $siteInfo->fetch();
 
             if(!empty($siteInfo->getId())) {
@@ -32,6 +35,8 @@ class SiteInfoController {
             }
 
             $siteInfo->save();
+
+            $this->updateCache($siteInfo);
 
             $response->json([
                 "message" => SAVED_WEBSITE_INFORMATION,
@@ -118,8 +123,7 @@ class SiteInfoController {
 
             $siteInfo->save();
 
-            $cache = new FileCache();
-            $cache->set('site_info', $siteInfo->toArray());
+            $this->updateCache($siteInfo);
 
             return $response->json([
                 "message" => UPDATED_IMAGES,
@@ -159,5 +163,10 @@ class SiteInfoController {
                 "message" => FATAL_ERROR
             ], 500);
         }
+    }
+
+    private function updateCache(SiteInfo $siteInfo) {
+        $cache = new FileCache();
+        $cache->set('site_info', $siteInfo->toArray());
     }
 }

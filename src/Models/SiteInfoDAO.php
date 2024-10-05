@@ -54,10 +54,6 @@ class SiteInfoDAO extends Database {
             $values = [];
 
             foreach ($siteInfo->toArray() as $key => $value) {
-                if(empty($value)) {
-                    continue;
-                }
-
                 $columns[] = "$key = ?";
                 $values[] = $value;
             }
